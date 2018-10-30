@@ -10,7 +10,7 @@ FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check
 MPI       = -DMPI=1 
 
 BINDIR    = ./bin
-TARGET    = $(BINDIR)/mc3decon
+TARGET    = $(BINDIR)/mc3deconv
 OBJS      = src/mc3decon.o src/params.o src/pt.o src/mcmc.o \
             src/init.o src/mt19937.o src/read_data.o \
 	    src/calclogPPD.o src/conv.o src/temp.o src/output.o
@@ -18,6 +18,7 @@ OBJS      = src/mc3decon.o src/params.o src/pt.o src/mcmc.o \
 all: $(TARGET) 
 
 $(TARGET): $(OBJS)
+	@if [ ! -d $(BINDIR) ]; then mkdir $(BINDIR); fi
 	$(MF90) $(FFLAGS) $(MPI) $^ -o $@ 
 
 
