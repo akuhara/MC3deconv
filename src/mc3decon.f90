@@ -31,23 +31,34 @@
 program mc3decon
   use params
   implicit none 
-  integer :: ierr
+  include "mpif.h"
+  integer :: ierr,i 
   integer :: nbins = 10
   real(8), allocatable :: chaintemp(:)
   real(8) :: Tlow = 1.d0
-  character(80) :: dir = "./"
+  integer :: from, tag
+  ! Initialize MPI 
+  call mpi_init(ierr)
+  call mpi_comm_size(MPI_COMM_WORLD, nproc, ierr)
+  call mpi_comm_rank(MPI_COMM_WORLD, rank,  ierr)
   
-  call pt(0, 0, 0, 0, 0, 0.d0, 0.d0, 0.d0, 0, 0.0, 0, &
-       & dir, nproc, rank)
-  
+  do i = 1, 100
+     from = MPI_ANY_SOURCE
+     write(*,*)from, rank
+  end do
+
+  ! Initialize model space, read input data & set parameters 
+  ! (see init.f90)
   call init()
   
   allocate(chaintemp(nchains))
   
   call setuptempladder(nchains, ncool, Tlow, Thigh, chaintemp)
   
-  call pt(1, ialg, nchains, nsteps, iburn, chaintemp, Thigh, Tlow, &
-       & nbins, swaprate, iseed0, dir, nproc, rank)
+  ! call pt(nchains, chaintemp)
+
+  !call pt(1, ialg, nchains, nsteps, iburn, chaintemp, Thigh, Tlow, &
+  !     & nbins, swaprate, iseed0, dir, nproc, rank)
   
   call output()
 
