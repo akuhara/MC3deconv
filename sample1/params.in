@@ -1,0 +1,75 @@
+#------------------------------------------------------------
+# 1.  Iteration number
+#------------------------------------------------------------
+# Number of burn-in period
+  100000
+# Number of sample period
+  500000
+# Interval of model sampling
+  100
+# Random number seeds 
+  444335008  635654
+#------------------------------------------------------------
+# 2.  Prallel tempering
+#------------------------------------------------------------
+# Number of chains per process
+  10
+# Number of non-tempered chains per process
+  2
+# maximum temperature
+  100.d0
+#------------------------------------------------------------
+# 3.  Observed data info.
+#------------------------------------------------------------
+# Data file (Z component)
+  input/syn_obs.z 
+# Data file (R component)
+  input/syn_obs.r
+# sampling interval (s)
+  0.05
+# Time window to be analyzed (relative to file start in sec)
+  195 255
+#------------------------------------------------------------
+# 4. Prior bounds
+#------------------------------------------------------------
+# number of later pulses (min. max.)
+  1 101
+# amplitude on Z (min. max.)
+ -0.8 0.8
+# amplitude on R (min. max.)
+ -0.8 0.8
+# timing (min. max.) relative to P
+  1.0 60.0
+#------------------------------------------------------------
+# 5. Probability of proposal types
+#------------------------------------------------------------
+# Birt
+  0.25
+# Death
+  0.25
+# shift timing
+  0.25
+# perturbe amplitude
+  0.25
+#------------------------------------------------------------
+# 6. Perturbation for random walk
+#------------------------------------------------------------
+# amplitude 1 and 2
+   0.05 0.05
+# amplitude for birth proposal
+   0.4 0.4
+# timing
+   0.1
+#------------------------------------------------------------
+# 7. Output Green's functions
+#------------------------------------------------------------
+# Time length (including negative time)
+  63.0
+# Time shift
+  3.0 
+# gaussian factor
+  8.0
+# min. and max. of bin
+  -2.2 2.2
+# bin width
+  0.02
