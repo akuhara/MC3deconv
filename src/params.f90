@@ -37,6 +37,7 @@ module params
   integer, parameter :: io_obs   = 20
   integer, parameter :: io_ppd   = 30
   integer, parameter :: io_mean  = 40
+  integer, parameter :: io_dim   = 50
   real, parameter :: eps = 1.0e-5
   real(8), parameter :: pi = 3.1415926535897931
   real(8), parameter :: pi2 = pi * 2.d0

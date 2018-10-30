@@ -49,7 +49,7 @@ subroutine init()
   allocate(logPPDstore(nchains))
   
   ! set counters zero
-  nsp_count(1:nchains) = 0
+  nsp_count(1:nsp_max) = 0
   green_count(1:ngrn, 1:nabin, 1:ncmp) = 0
   step_count(1:nchains) = 0
   naccept(1:ntype) = 0

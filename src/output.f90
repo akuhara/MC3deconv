@@ -30,16 +30,18 @@ subroutine output()
 #end if  
   integer :: it, ibin, icmp, ierr, nmod_sum, i
   integer :: naccept_sum(ntype), nprop_sum(ntype)
+  integer, allocatable :: nsp_count_sum(:)
   integer, allocatable :: green_count_sum(:,:,:)
   real, allocatable :: green_mean(:,:), p(:), w(:)
   character(100), dimension(ncmp) :: ppd_files, mean_files
+  character(100) :: dim_file
   real :: t, y
 
 
 
   allocate(green_count_sum(ngrn, nabin, ncmp))
   allocate(green_mean(ngrn,ncmp), p(ngrn), w(ngrn))
-  
+  allocate(nsp_count_sum(nsp_max))
 
   call mpi_reduce(nmod, nmod_sum, 1, MPI_INTEGER4, &
        & MPI_SUM, 0, MPI_COMM_WORLD, ierr)
@@ -54,11 +56,15 @@ subroutine output()
        & ngrn * nabin * ncmp, MPI_INTEGER4, MPI_SUM, 0, &
        & MPI_COMM_WORLD, ierr)
 
+  call mpi_reduce(nsp_count(1), nsp_count_sum(1), &
+       & nsp_max, MPI_INTEGER4, MPI_SUM, 0, &
+       & MPI_COMM_WORLD, ierr)
+
   ppd_files(ir) = 'Gr.ppd'
   ppd_files(iz) = 'Gz.ppd'
   mean_files(ir) = "Gr.mean"
   mean_files(iz) = "Gz.mean"
-  
+  dim_file       = "dim.ppd"
 
   if (rank == 0) then
      ! information
@@ -143,7 +149,15 @@ subroutine output()
         close(io_mean)
      end do
 
-     
+     open(io_dim, file = dim_file, status = "unknown", iostat = ierr)
+     if (ierr /= 0) then
+        write(0,*)"ERROR: cannot open ", trim(dim_file)
+        stop
+     end if
+     do i = 1, nsp_max
+        write(io_dim,*) i, real(nsp_count_sum(i)) / real(nmod_sum)
+     end do
+     close(io_dim)
   end if
   
   return 

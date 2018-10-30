@@ -79,7 +79,7 @@
 ! log file for each process -> easiest to see what's going on in MPI
 
          verbose = .false.
-         silent = .false.
+         silent = .true.
          write(cproc,'(I0)') iproc
          filename=trim(basedir)//'log/'//'log_'//trim(cproc)//'.txt'
          if(.not.silent)&
