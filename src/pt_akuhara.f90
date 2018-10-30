@@ -1,11 +1,13 @@
 subroutine pt_akuhara(chaintemp)
   use params
+  use mt19937
   implicit none
   include "mpif.h"
   real(8), intent(in) :: chaintemp(nchains)
   real(8) :: logPPD(nchains)
-  integer :: status(MPI_STATUS_SIZE), ierr, iproc
-  integer :: it, ichain
+  integer :: status(MPI_STATUS_SIZE), ierr, rank1, rank2
+  integer :: ichain1, ichain2
+  integer :: it, n_all, itarget1, itarget2, ipack(4), n_iter
   integer :: pair(2)
   integer, allocatable :: finished(:)
   real(8) :: dmsg(4), temp1, e1, temp2, e2, temp, e
@@ -15,82 +17,68 @@ subroutine pt_akuhara(chaintemp)
 
 
   allocate(finished(nproc))
+  n_all = (nproc - 1) * nchains
+  n_iter = iburn + nsteps
   
-  if (rank == 0 .and. nproc > 1) then
-
-     pair = 0
-     finished = 0
-     finished(1:nproc-1) = 1
-     ! Parent's process 
-     do while (sum(finished(1:nproc)) /= 0)
-        call mpi_recv(dmsg, 4, MPI_DOUBLE_PRECISION, &
-             & MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, status, &
-             & ierr)
-
-        if (dmsg(2) == 0.0) then
-           iproc = int(dmsg(1))
-           finished(iproc) = 0
-        else if (sum(pair) == 0 .or. pair(1) == dmsg(1)) then
-           pair(1) = dmsg(1)
-           temp1 = dmsg(3)
-           e1 = dmsg(4)
-        else
-           pair(2) = dmsg(2)
-           rmsg(2) = 1
-           rmsg(1) = pair(2)
-           
-           temp2 = dmsg(3)
-           e2 = dmsg(4)
-           
-           call tswap_accept(t1, t2, e1, e2, yn)
-           
-           if (yn) then
-              rmsg(2) = 1
-           else
-              rmsg(2) = 0
-           end if
-              
-           rmsg(3) = temp2
-           call mpi_send(rmsg, 3, MPI_DOUBLE_PRECISION, pair(1), &
-                & 1234, MPI_COMM_WORLD, ierr)
-           
-           rmsg(1) = pair(1)
-           rmsg(3) = temp1
-           
-           call mpi_send(rmsg, 3, MPI_DOUBLE_PRECISION, pair(2), &
-                & 1234, MPI_COMM_WORLD, ierr)
-           
-           pair(1:2) = 0
-        end if
-     end do
-  else
-     ! Children's process
-     dmsg(1) = rank
-     dmsg(2) = 1.0
-
-     do it = 1, iburn + nsteps
-
-        ! Within-chain step
+  do it = 1, iburn + nsteps
+     if (rank > 0) then
+        ! within-chain step for all chains
         do ichain = 1, nchains
-           temp = chaintemp(ichain) 
-
+           temp = chaintemp(ichain)
            call AdvanceChain(ichain, temp, e)
            logPPD(ichain) = e
         end do
-        
-        ! Temperature swap
-        if (nchains > 1 .or. nproc > 2) then
-           swapped = .false.
-           do ichain = 1, nchains
-              
-           end do
+        call mpi_bcast(ipack, 4, MPI_INTEGER4, 0, &
+             & MPI_COMM_WORLD, ierr)
+        rank1 = ipack(1)
+        rank2 = ipack(2)
+        ichain1 = ipack(3)
+        ichain2 = ipack(4)
+        if (rank1 == rank .and. rank2 == rank) then
+           ! Swap within the same processor
+           call tswap_accept
+           if (yn) then
+              chaintemp() =
+              chaintemp() = 
+tswap           end if
+        else if (rank1 == rank) then
+           ! Passive
+           call mpi_send
+           call mpi_recv
+           
+        else if (rank2 == rank) then
+           ! Active
+           call mpi_recv
+           call tswap_accept
+           call mpi_send
+           if (yn) then
+              chaintemp() =
+           end if
         end if
-     end do
-  end if
-  
+        
+     else 
+        ! temperature swap between two selected chains
+        itarget1 = int(grnd() * n_all)
+        do 
+           itarget2 = int(grnd() * n_all)
+           if (itarget2 /= iarget1) exit 
+        end do
+        rank1 = int(itarget1 / nchains) + 1
+        rank2 = int(itarget2 / nchains) + 1
+        ichain1 = mod(itarget1, nchains) + 1
+        ichain2 = mod(itarget2, nchains) + 1
+        
+        ipack(1) = rank1
+        ipack(2) = rank2
+        ipack(3) = ichain1
+        ipack(4) = ichain2
+        call mpi_bcast(ipack, 4, MPI_INTEGER4, 0, &
+             & MPI_COMM_WORLD, ierr)
+        
+        
+     end if
 
-  
-
+  end do
   
   return 
 end subroutine pt_akuhara

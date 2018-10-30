@@ -22,7 +22,7 @@ $(TARGET): $(OBJS)
 	@if [ ! -d $(BINDIR) ]; then mkdir $(BINDIR); fi
 	$(MF90) $(FFLAGS) $(MPI) $^ -o $@ 
 
-src/pt_akuhara.o: params.mod
+src/pt_akuhara.o: params.mod mt19937.mod
 src/mc3decon.o: params.mod
 src/mcmc.o:     params.mod mt19937.mod
 src/init.o:     params.mod mt19937.mod
