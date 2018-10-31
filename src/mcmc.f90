@@ -130,7 +130,7 @@ subroutine mcmc(ichain, T, logPPD)
         tmp_ampz = amp_test(itarget, iz)
         
         logQ12 = log(dble(tmp_nsp + 1))
-        logQ12 = logQ12 - log(dble(del_idt))
+        logQ12 = logQ12 - log(dble(del_idt) * delta)
         logQ12 = logQ12 + &
              & (                                       &
              & -log(sdv_birth(ir)) - 0.5 * log(pi2) -  &
