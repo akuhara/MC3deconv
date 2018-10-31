@@ -51,10 +51,11 @@ subroutine pt_akuhara(chaintemp)
            e1 = logPPD(ichain1)
            e2 = rpack(2)
            call tswap_accept(temp1, temp2, e1, e2, yn)
+           !write(*,*)temp1, temp2, e1, e2, yn
            if (yn) then
               chaintemp(ichain1) = temp2
+              rpack(1) = temp1
            end if
-           rpack(1) = chaintemp(ichain1)
            call mpi_send(rpack, 1, MPI_REAL8, rank2, 1988, &
                 & MPI_COMM_WORLD, status, ierr)
         else if (rank2 == rank) then
