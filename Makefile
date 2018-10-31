@@ -11,10 +11,9 @@ MPI       = -DMPI=1
 
 BINDIR    = ./bin
 TARGET    = $(BINDIR)/mc3deconv
-OBJS      = src/mc3decon.o src/params.o src/pt.o src/mcmc.o \
-            src/init.o src/mt19937.o src/read_data.o \
-	    src/calclogPPD.o src/conv.o src/temp.o src/output.o \
-            src/pt_akuhara.o
+OBJS      = src/mc3decon.o src/params.o src/mcmc.o \
+            src/init.o src/pt_akuhara.o src/mt19937.o src/read_data.o \
+	    src/calclogPPD.o src/conv.o src/temp.o src/output.o 
 
 all: $(TARGET) 
 

@@ -2,9 +2,9 @@
 # 1.  Iteration number
 #------------------------------------------------------------
 # Number of burn-in period
-  100000
+  10000
 # Number of sample period
-  500000
+  50000
 # Interval of model sampling
   100
 # Random number seeds 

@@ -1,9 +1,7 @@
 subroutine setuptempladder(nchains, ncool, Tlow, Thigh, Chaintemp)
   use mt19937
   implicit none 
-#if defined MPI
   include "mpif.h"
-#endif
   integer, intent(in)  :: nchains, ncool
   real(8), intent(out) :: chaintemp(nchains)
   real(8), intent(in)  :: Tlow,Thigh

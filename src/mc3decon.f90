@@ -54,7 +54,8 @@ program mc3decon
   allocate(chaintemp(nchains))
   
   call setuptempladder(nchains, ncool, Tlow, Thigh, chaintemp)
-  
+  call pt_akuhara(chaintemp)
+
   ! call pt(nchains, chaintemp)
 
   !call pt(1, ialg, nchains, nsteps, iburn, chaintemp, Thigh, Tlow, &
