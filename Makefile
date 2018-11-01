@@ -1,10 +1,19 @@
 MF90      = mpif90
 
+
+# GNU fortran compiler
+FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check  
+
+# GNU fortran compiler (for debug)
 #FFLAGS = -g -Wall -fbounds-check -O -Wuninitialized \
             -ffpe-trap=invalid,zero,overflow -fbacktrace \
             -fno-range-check 
 
-FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check  
+# Intel compiler
+#FFLAGS = -O3 -parallel -xAVX
+
+# Intel compiler (for debug)
+#FFLAGS = -O0 -g -traceback -CB -fpe0 -check uninit -std -warn all -check all
 
 
 MPI       = -DMPI=1 
@@ -33,9 +42,7 @@ src/output.o: params.mod
 clean: 
 	-rm -f *.mod src/*.o
 
-#------------------------------------------------------------
-# Pattern rule
-#------------------------------------------------------------
+# General rule
 $(OBJS): %.o: %.f90
 	$(MF90) $(FFLAGS) -c $< -o $*.o 
 %.mod: src/%.f90 src/%.o
