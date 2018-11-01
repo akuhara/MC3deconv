@@ -12,7 +12,7 @@ MPI       = -DMPI=1
 BINDIR    = ./bin
 TARGET    = $(BINDIR)/mc3deconv
 OBJS      = src/mc3deconv.o src/params.o src/mcmc.o \
-            src/init.o src/pt_akuhara.o src/mt19937.o src/read_data.o \
+            src/init.o src/pt_control.o src/mt19937.o src/read_data.o \
 	    src/calclogPPD.o src/conv.o src/temp.o src/output.o 
 
 all: $(TARGET) 
@@ -21,7 +21,7 @@ $(TARGET): $(OBJS)
 	@if [ ! -d $(BINDIR) ]; then mkdir $(BINDIR); fi
 	$(MF90) $(FFLAGS) $(MPI) $^ -o $@ 
 
-src/pt_akuhara.o: params.mod mt19937.mod
+src/pt_control.o: params.mod mt19937.mod
 src/mc3deconv.o: params.mod
 src/mcmc.o:     params.mod mt19937.mod
 src/init.o:     params.mod mt19937.mod

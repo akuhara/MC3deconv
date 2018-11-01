@@ -55,7 +55,7 @@ program mc3deconv
   
   call set_temp(nchains, ncool, Tlow, Thigh, chaintemp)
   
-  call pt_akuhara(chaintemp)
+  call pt_control(chaintemp)
     
   call output()
 
