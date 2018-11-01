@@ -32,8 +32,13 @@ subroutine init()
   use params
   use mt19937
   implicit none 
-  integer :: ichain, i, icmp, isp
+  integer :: ichain, i, icmp, isp, n
   real :: maxamp
+  logical :: output_ini_model
+  real, allocatable :: ini_gr(:), ini_gz(:)
+  character(200) :: ini_file
+
+  output_ini_model = .false.
   
   ! get tuning parametes
   call read_param('params.in')
@@ -47,7 +52,15 @@ subroutine init()
   allocate(step_count(nchains))
   allocate(green_count(ngrn, nabin, ncmp))
   allocate(logPPDstore(nchains))
-  
+
+
+  if (output_ini_model .and. rank > 0) then
+     allocate(ini_gr(ngrn), ini_gz(ngrn))
+     write(ini_file, '(A3,I2.2)') "ini", rank
+     open(io_ini, file = ini_file, status = "unknown")
+     
+  end if
+
   ! set counters zero
   nsp_count(1:nsp_max) = 0
   green_count(1:ngrn, 1:nabin, 1:ncmp) = 0
@@ -78,9 +91,7 @@ subroutine init()
   amp(:, :, :) = 0.0
   idt(:, :) = 0
   do ichain = 1, nchains
-     ! regularization by direct P
-     amp(0, iz, ichain) = 1.0
-     idt(0, ichain) = 1
+     
      
      ! number of pulses
      nsp(ichain) = nsp_min + int(grnd() * del_nsp)
@@ -92,18 +103,41 @@ subroutine init()
      
      ! amplitudes
      do icmp = 1, ncmp
-        do isp = 1, nsp(ichain)
+        do isp = 0, nsp(ichain)
            amp(isp, icmp, ichain) = amp_min(icmp) + &
                 & real(grnd()) * del_amp(icmp)
         end do
      end do
      
+     ! regularization by direct P
+     amp(0, iz, ichain) = 1.0
+     idt(0, ichain) = 1
+     
+     ! output initial model 
+     if (output_ini_model .and. rank > 0) then
+        n = nsp(ichain)
+        call conv_gauss(n, idt(0:n, ichain), amp(0:n, iz, ichain), &
+             & nflt, flt, ngrn, ntpre, ini_gz)
+        
+        call conv_gauss(n, idt(0:n, ichain), amp(0:n, ir, ichain), &
+             & nflt, flt, ngrn, ntpre, ini_gr)
+        do i = 1, ngrn
+           write(io_ini,*)(i - ntpre - 1) * delta, &
+                & ini_gz(i), ini_gr(i)
+        end do
+        write(io_ini,*)">"
+        
+     end if
+     
+
      ! calculate PPD
      call calclogPPD(nsp(ichain), idt(:, ichain), &
           & amp(:, :, ichain), logPPDstore(ichain))
      
   end do
-  
+  if (output_ini_model .and. rank > 0) then
+     close(io_ini)
+  end if
 
 
   return 

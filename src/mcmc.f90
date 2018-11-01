@@ -57,8 +57,9 @@ subroutine mcmc(ichain, T, logPPD)
   null_flag = .false.
   icountmcmc = icountmcmc + 1
   step_count(ichain) = step_count(ichain) + 1
-  if (ichain == 1 .and. mod(step_count(ichain), 1000) == 0) then
-     write(*,*)step_count(ichain), rank
+  if (ichain == 1 .and. mod(step_count(ichain), 1000) == 0 &
+       & .and. rank == 1) then
+     write(*,*)"Iteration:", step_count(ichain), "/", iburn + nsteps
   end if
   nsp_test  = nsp(ichain)
   idt_test(:)  = idt(:,ichain)
