@@ -47,7 +47,7 @@ module params
   !********************************************************************
   integer :: nproc
   integer :: rank
-  integer :: iseed, iseed0
+  integer :: iseed
 
   !********************************************************************
   ! Temperature
@@ -160,7 +160,7 @@ subroutine read_param(paramfile)
   call get_line(io_param, line)
   read(line, *) nskip
   call get_line(io_param, line)
-  read(line, *) iseed0, iseed
+  read(line, *) iseed
 
 
   call get_line(io_param, line)
