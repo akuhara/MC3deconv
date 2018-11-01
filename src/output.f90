@@ -25,9 +25,7 @@
 subroutine output()
   use params
   implicit none 
-#if defined MPI
   include "mpif.h"
-#end if  
   integer :: it, ibin, icmp, ierr, nmod_sum, i
   integer :: naccept_sum(ntype), nprop_sum(ntype)
   integer, allocatable :: nsp_count_sum(:)

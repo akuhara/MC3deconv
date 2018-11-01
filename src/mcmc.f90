@@ -57,8 +57,9 @@ subroutine mcmc(ichain, T, logPPD)
   null_flag = .false.
   icountmcmc = icountmcmc + 1
   step_count(ichain) = step_count(ichain) + 1
-  if (ichain == 1 .and. mod(step_count(ichain), 1000) == 0) then
-     write(*,*)step_count(ichain), rank
+  if (ichain == 1 .and. mod(step_count(ichain), 1000) == 0 &
+       & .and. rank == 1) then
+     write(*,*)"Iteration:", step_count(ichain), "/", iburn + nsteps
   end if
   nsp_test  = nsp(ichain)
   idt_test(:)  = idt(:,ichain)
@@ -130,7 +131,7 @@ subroutine mcmc(ichain, T, logPPD)
         tmp_ampz = amp_test(itarget, iz)
         
         logQ12 = log(dble(tmp_nsp + 1))
-        logQ12 = logQ12 - log(dble(del_idt * delta))
+        logQ12 = logQ12 - log(dble(del_idt) * delta)
         logQ12 = logQ12 + &
              & (                                       &
              & -log(sdv_birth(ir)) - 0.5 * log(pi2) -  &

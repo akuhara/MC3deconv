@@ -38,6 +38,7 @@ module params
   integer, parameter :: io_ppd   = 30
   integer, parameter :: io_mean  = 40
   integer, parameter :: io_dim   = 50
+  integer, parameter :: io_ini   = 70
   real, parameter :: eps = 1.0e-5
   real(8), parameter :: pi = 3.1415926535897931
   real(8), parameter :: pi2 = pi * 2.d0
@@ -47,7 +48,7 @@ module params
   !********************************************************************
   integer :: nproc
   integer :: rank
-  integer :: iseed, iseed0
+  integer :: iseed
 
   !********************************************************************
   ! Temperature
@@ -160,7 +161,7 @@ subroutine read_param(paramfile)
   call get_line(io_param, line)
   read(line, *) nskip
   call get_line(io_param, line)
-  read(line, *) iseed0, iseed
+  read(line, *) iseed
 
 
   call get_line(io_param, line)
@@ -230,7 +231,7 @@ subroutine read_param(paramfile)
   call get_line(io_param, line)
   read(line, *) dabin
   nabin = (abin_max - abin_min) / real(dabin)
-  
+
   close(io_param)
 
   return 

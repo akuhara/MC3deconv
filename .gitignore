@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Working directory
+sample1/Wrk/
+sample2/Wrk/

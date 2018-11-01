@@ -1,7 +1,7 @@
 !======================================================================= 
 !
 !
-! mc3decon: Multi-Channel deconvolution by MCMC
+! mc3deconv: Multi-Channel deconvolution by MCMC
 !
 ! 
 ! Copyright (c) 2018 Takeshi Akuhara
@@ -28,31 +28,39 @@
 !
 !=======================================================================
 
-program mc3decon
+program mc3deconv
   use params
   implicit none 
-  integer :: ierr
+  include "mpif.h"
+  integer :: ierr,i 
   integer :: nbins = 10
   real(8), allocatable :: chaintemp(:)
   real(8) :: Tlow = 1.d0
-  character(80) :: dir = "./"
+  integer :: from, tag
+  ! Initialize MPI 
+  call mpi_init(ierr)
+  call mpi_comm_size(MPI_COMM_WORLD, nproc, ierr)
+  call mpi_comm_rank(MPI_COMM_WORLD, rank,  ierr)
+  if (nproc < 2) then
+     write(0,*)"ERROR: at least 2 processor is necesarry!"
+     call mpi_finalize(ierr)
+     stop
+  end if
+ 
   
-  call pt(0, 0, 0, 0, 0, 0.d0, 0.d0, 0.d0, 0, 0.0, 0, &
-       & dir, nproc, rank)
   
   call init()
   
   allocate(chaintemp(nchains))
   
-  call setuptempladder(nchains, ncool, Tlow, Thigh, chaintemp)
+  call set_temp(nchains, ncool, Tlow, Thigh, chaintemp)
   
-  call pt(1, ialg, nchains, nsteps, iburn, chaintemp, Thigh, Tlow, &
-       & nbins, swaprate, iseed0, dir, nproc, rank)
-  
+  call pt_akuhara(chaintemp)
+    
   call output()
 
   call mpi_finalize(ierr)
   
 
   stop
-end program mc3decon
+end program mc3deconv

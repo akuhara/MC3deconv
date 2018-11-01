@@ -1,9 +1,7 @@
-subroutine setuptempladder(nchains, ncool, Tlow, Thigh, Chaintemp)
+subroutine set_temp(nchains, ncool, Tlow, Thigh, Chaintemp)
   use mt19937
   implicit none 
-#if defined MPI
   include "mpif.h"
-#endif
   integer, intent(in)  :: nchains, ncool
   real(8), intent(out) :: chaintemp(nchains)
   real(8), intent(in)  :: Tlow,Thigh
@@ -18,4 +16,4 @@ subroutine setuptempladder(nchains, ncool, Tlow, Thigh, Chaintemp)
   chaintemp(1:ncool) = Tlow                   ! Force first chain to be at Tlow
   
   return
-end subroutine setuptempladder
+end subroutine set_temp
