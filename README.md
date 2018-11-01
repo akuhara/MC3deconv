@@ -12,3 +12,7 @@ Run the program by `mpirun -np (# of processes) bin/MC3deconv`. Since one of the
 ## Input
 
 ## Output
+---
+# Samples
+## Sample1: Synthetic data
+## Sample2: Real OBS data
