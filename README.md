@@ -16,7 +16,8 @@ Run the program by `mpirun -np (# of processes) bin/MC3deconv`. Since one of the
 ## Input
 
 ## Output
-In current version, five output files are created after running the program. 
+In current version, five output files are created after running the program.
+
 ---
 ## Samples
 ### Sample1: Synthetic data
