@@ -18,6 +18,9 @@ Run the program by `mpirun -np (# of processes) bin/MC3deconv`. Since one of the
 ## Output
 In current version, five output files are created after running the program.
 ### dim.mpdf (ascii format)
+This file contains marginal probability function of the number of pulses.
+(Column 1)        | (Column 2)
+number of pulses  | marginal probability
 
 
 ---
