@@ -32,13 +32,15 @@ subroutine init()
   use params
   use mt19937
   implicit none 
-  integer :: ichain, i, icmp, isp, n
-  real :: maxamp
-  logical :: output_ini_model
+  integer :: ichain, i, icmp, isp, n, ierr
+  real :: maxamp, t, ar, az
+  logical :: output_ini_model, give_ini_model ! for debug
   real, allocatable :: ini_gr(:), ini_gz(:)
+  
   character(200) :: ini_file
 
   output_ini_model = .false.
+  give_ini_model = .false.
   
   ! get tuning parametes
   call read_param('params.in')
@@ -91,24 +93,49 @@ subroutine init()
   amp(:, :, :) = 0.0
   idt(:, :) = 0
   do ichain = 1, nchains
-     
-     
-     ! number of pulses
-     nsp(ichain) = nsp_min + int(grnd() * del_nsp)
-     
-     ! timing
-     do isp = 1, nsp(ichain)
-        idt(isp, ichain) = idt_min + int(grnd() * del_idt)
-     end do
-     
-     ! amplitudes
-     do icmp = 1, ncmp
-        do isp = 0, nsp(ichain)
-           amp(isp, icmp, ichain) = amp_min(icmp) + &
-                & real(grnd()) * del_amp(icmp)
+     if (give_ini_model .and. ichain < nchains / 2) then
+        ! Initial model is given
+        open(io_ini2, file = "ini_model", status = "old", iostat = ierr)
+        if (ierr /= 0) then
+           write(0,*)"ERROR: (DEBUG MODE) ini_model must be given"
+           stop
+        end if
+        isp = -1
+        do 
+           read(io_ini2, *, iostat = ierr)t, ar, az
+           if (ierr /= 0)  then
+              exit
+           else 
+              isp = isp + 1
+              amp(isp, ir, ichain) = ar
+              amp(isp, iz, ichain) = az
+              idt(isp, ichain) = nint(t / delta) + 1
+           end if
+           
+
+           
         end do
-     end do
-     
+        nsp(ichain) = isp
+        close(io_ini2)
+     else
+        ! Initial models are determined randomly
+        ! number of pulses
+        nsp(ichain) = nsp_min + int(grnd() * del_nsp)
+        
+        ! timing
+        do isp = 1, nsp(ichain)
+           idt(isp, ichain) = idt_min + int(grnd() * del_idt)
+        end do
+        
+        ! amplitudes
+        do icmp = 1, ncmp
+           do isp = 0, nsp(ichain)
+              amp(isp, icmp, ichain) = amp_min(icmp) + &
+                   & real(grnd()) * del_amp(icmp)
+           end do
+        end do
+     end if
+
      ! regularization by direct P
      amp(0, iz, ichain) = 1.0
      idt(0, ichain) = 1
@@ -118,7 +145,7 @@ subroutine init()
         n = nsp(ichain)
         call conv_gauss(n, idt(0:n, ichain), amp(0:n, iz, ichain), &
              & nflt, flt, ngrn, ntpre, ini_gz)
-        
+           
         call conv_gauss(n, idt(0:n, ichain), amp(0:n, ir, ichain), &
              & nflt, flt, ngrn, ntpre, ini_gr)
         do i = 1, ngrn
@@ -129,7 +156,7 @@ subroutine init()
         
      end if
      
-
+     
      ! calculate PPD
      call calclogPPD(nsp(ichain), idt(:, ichain), &
           & amp(:, :, ichain), logPPDstore(ichain))
@@ -138,7 +165,7 @@ subroutine init()
   if (output_ini_model .and. rank > 0) then
      close(io_ini)
   end if
-
+  
 
   return 
 end subroutine init
