@@ -1,4 +1,4 @@
-# MC3 deconvolution
+# MC3 deconvolution (ver. 0.0)
 This package provides a open code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-functions) via multichannel deconvolution by rj-McMC (MC3-deconvolution). 
 
 ---
@@ -24,7 +24,7 @@ Run the program by `mpirun -np (# of processes) bin/mc3deconv`. Since one of the
 
 ## Output
 
-In current version, five output files are created after running the program.
+In the current version (ver. 0.0), five output files are created after running the program.
 ### dim.ppd (ascii format)
 This file contains marginal probability function of the number of pulses. The format is <1st column: # of pulses> <2nd column: probability>.
 ### Gr.ppd / Gz.ppd (ascii forat)
