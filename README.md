@@ -37,13 +37,15 @@ This file contains marginal probability function of the number of pulses. The fo
 
 ### Gr.ppd / Gz.ppd (ascii forat)
 
-These files includes the posterior probability distribution of R and Z component Green's functions. The format is
+These files includes the posterior probability distribution of R and Z component Green's functions. The format is:
 
-`<1st column: Time after P (s)> <2nd column: amplitude> <3rd column: probability>`
+|1st column|2nd column|3rd colmun|
+|:--:|:--:|:--:|
+|time after P (s)|amplitude|probability|`
 
 ### Gr.mean / Gz.mean (SAC format)
 
-These files includes the mean models of R and Z component Green's functions in SAC format.
+These files includes the mean models of R and Z component Green's functions in [SAC](http://ds.iris.edu/files/sac-manual/) format.
 
 ---
 
