@@ -28,9 +28,9 @@ In the current version (ver. 0.0), five output files are created after running t
 
 ### dim.ppd (ascii format)
 
-This file contains marginal probability function of the number of pulses. The format is 
-
+This file contains marginal probability function of the number of pulses. The format is:
 |1st column|2nd column|
+|:--:|:--:|
 |# of pulses|probability|
 
 
