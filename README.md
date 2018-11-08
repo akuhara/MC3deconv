@@ -39,6 +39,18 @@ The program, `mc3deconv`, assumes a parameter file, in which tuning parameters a
 |13| Lower prior limit for Z amplitude | Upper limit|-0.8|0.8|
 |14| Lower prior limit for R amplitude | Upper limit|-0.8|0.8|
 |15| Lower piror limit for pulse timing relative to P (s) | Upper limit|1.0|60.0|
+|16| Probability of birth proposal (adding a pulse) |-|0.35|| 
+|17| Probability of death proposal (removing a pulse)|-|0.35||
+|18| Probability of time-shit proposal |-|0.05|-|
+|19| Probability of amplitude-perturb proposal |-|0.25|-|
+|20| Standard deviation to perturb Z amplitude | Same but for R amplitude| 0.05 | 0.05|
+|21| Standard deviation to newly generate Z amplitude | Same but for R amplitude | 0.4 | 0.4|
+|22| Standard deviation to shift timing (s) | -|0.1|-|
+|23| Total time length of output (s) | -|63.0|-|
+|24| Acausal time length preceding P in output (s) | - | 3.0 | -|
+|25| Factor of Gaussian low-pass filter | - | 8.0 | -|
+|26| Minimum amplitudes for output| Maximum | -2.2 | 2.2|
+|27| Amplitude bin width for output| - | 0.02 | |
 
 
 ---
