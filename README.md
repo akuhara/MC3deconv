@@ -6,7 +6,7 @@ This package provides a open code to perform deconvolution of teleseismic wavefo
 
 One of the main targets of seismology is to explore the Earth's subsurface structure using seismic waveforms. To extract useful information from the waveforms, which usually look very complicated and tell us nothing at the first sight, the receiver function method has been invented in 1970s. The method eliminates the incident wavelet shape from the seismograms by deconvolution, allowing us to easily detect useful signal such as P-to-S converted phases at seismic velocity discontinuities. Behind the many successful applications of this method, there are well-known issues in the deconvolution process and related assumption that the incident wavelet must be approximated by its vertical component record. Due to this, receiver function methods get in trouble when analyzing data from ocean-bottom instruments where strong reverberations dominate the vertical component motion.    
 
-The technique developed here, MC3deconv, nicely overcomes these issues. The method utilizes equation of multichannel deconvolution, not requiring the problematic deconvolution and approximation of the incident wavelet. To regularize the inverse problem, receiver-sided Green's functions are expressed in the form of successive pulses and the number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Marokov-chain Monte Calro and the Parallel Tempering.
+The technique developed here, MC3deconv, nicely overcomes these issues. The method utilizes equation of multichannel deconvolution, not requiring the problematic deconvolution and approximation of the incident wavelet. To regularize the inverse problem, receiver-sided Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Marokov-chain Monte Calro and the Parallel Tempering.
 
 More details can be found in [the paper by T. Akuhara].
 
@@ -22,7 +22,7 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 
 ## How to install
 
-Compiling soce codes can be done by simiply typing, `make` in the main directory. This process assumes that `mpif90` is available and that the `mpif90` links to GNU fortran compiler (i.e., `gfortran`). Alternatively, you can use `mpif90` that links to Intel compiler (i.e., `ifort`). In this case, some modification is necessary in Makefile (see Makefile for details). Currently, we have chekced the program working correctly on centOS7 with GNU fortran compiler.
+Compiling source codes can be done by simiply typing, `make` in the main directory. This process assumes that `mpif90` is available and that the `mpif90` links to GNU fortran compiler (i.e., `gfortran`). Alternatively, you can use `mpif90` that links to Intel compiler (i.e., `ifort`). In this case, some modification is necessary in Makefile (see Makefile for details). Currently, we have chekced the program working correctly on centOS7 with GNU fortran compiler.
 
 
 ## How to run
