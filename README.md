@@ -33,7 +33,7 @@ The program, `mc3deconv`, assumes a parameter file, in which tuning parameters a
 |7| Input Z component file (in SAC format) | -|
 |8| Input R component file (in SAC format)|-|
 |9| Sampling interval of input data (sec)|-|
-|10|Position of time window relative to file beginning| start time (s) | end time (s)| 
+|10|Start time of the analysis window relative to file beginning (s)| start time (s) | 
 
 ---
 
