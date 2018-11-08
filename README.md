@@ -20,7 +20,7 @@ Run the program by `mpirun -np (# of processes) bin/mc3deconv`. Since one of the
 
 ## Input
 
-The program, `mc3deconv`, assumes a parameter file, in which tuning parameters and input data are specified, exists in the currenct directory with the name "params.in". The format of the parameter file is as below, but you can put comment lines that must star with #.
+The program, `mc3deconv`, assumes a parameter file, in which tuning parameters and input data are specified, exists in the currenct directory with the name "params.in". The format of the parameter file is as below, but you can put comment lines, if necessary, that must start with "#".
 
 |Line #|parameter 1|parameter 2|Example value1| Example value2|
 |:--:|:--:|:--:|:--:|:--|
