@@ -22,7 +22,7 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 
 ## How to install
 
-Compiling soce codes can be done by simiply typing, `make` in the main directory. This process assumes that `mpif90` is available and that the `mpif90` links to GNU frotran compiler (i.e., `gfortran`). Alternatively, you can use `mpif90` that links to Intel compiler (i.e., `ifort`). In this case, some modification is necessary in Makefile (see Makefile for details). Currently, we have chekced the program working correctly on centOS7 with GNU fortran compiler.
+Compiling soce codes can be done by simiply typing, `make` in the main directory. This process assumes that `mpif90` is available and that the `mpif90` links to GNU fortran compiler (i.e., `gfortran`). Alternatively, you can use `mpif90` that links to Intel compiler (i.e., `ifort`). In this case, some modification is necessary in Makefile (see Makefile for details). Currently, we have chekced the program working correctly on centOS7 with GNU fortran compiler.
 
 
 ## How to run
@@ -102,3 +102,8 @@ These files includes the mean models of R and Z component Green's functions in [
 ## Samples
 ### Sample1: Synthetic data
 ### Sample2: Real OBS data
+
+
+## Acknowledgments
+
+OBS data in sample 2 are collected by K. Nakahigashi and T. Yamada. 
