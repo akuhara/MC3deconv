@@ -1,4 +1,4 @@
-# MultiChannel deconvolution by reversible-jump Markov-chain Monte Calro (MC3deoncv)
+# MultiChannel deconvolution by reversible-jump Markov-Chain Monte Calro (MC3deoncv)
 
 This package provides a open code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-sided Green's functions, which is expected to similar to conventional receiver functions in ideal condtions) via MultiChannel deconvolution using reversible-jump Moarkov-Chain Mente Calro (MC3deconv). 
 
