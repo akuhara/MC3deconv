@@ -30,6 +30,10 @@ The program, `mc3deconv`, assumes a parameter file, in which tuning parameters a
 |4| # of McMC chains per process (for parallel tempering|-|
 |5| # of non-tempered chains|-|
 |6| Maximum temperature|-|
+|7| Input Z component file (in SAC format) | -|
+|8| Input R component file (in SAC format)|-|
+|9| Sampling interval of input data (sec)|-|
+|10|Position of time window relative to file beginning| start time (s) | end time (s)| 
 
 ---
 
