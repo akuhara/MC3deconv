@@ -25,11 +25,22 @@ Run the program by `mpirun -np (# of processes) bin/mc3deconv`. Since one of the
 ## Output
 
 In the current version (ver. 0.0), five output files are created after running the program.
+
 ### dim.ppd (ascii format)
-This file contains marginal probability function of the number of pulses. The format is <1st column: # of pulses> <2nd column: probability>.
+
+This file contains marginal probability function of the number of pulses. The format is 
+
+`<1st column: # of pulses> <2nd column: probability>`
+
+
 ### Gr.ppd / Gz.ppd (ascii forat)
-These files includes the posterior probability distribution of R and Z component Green's functions. The format is <1st column: Time after P (s)> <2nd column: amplitude> <3rd column: probability>.
+
+These files includes the posterior probability distribution of R and Z component Green's functions. The format is
+
+`<1st column: Time after P (s)> <2nd column: amplitude> <3rd column: probability>`
+
 ### Gr.mean / Gz.mean (SAC format)
+
 These files includes the mean models of R and Z component Green's functions in SAC format.
 
 ---
