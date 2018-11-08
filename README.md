@@ -26,6 +26,10 @@ The program, `mc3deconv`, assumes a parameter file, in which tuning parameters a
 |:--:|:--:|:--:|
 |1| # of iterations in burn-in period|-|
 |2| # of iterations in sampling period|-| 
+|3| # of iterations per generating one sample|-|
+|4| # of McMC chains per process (for parallel tempering|-|
+|5| # of non-tempered chains|-|
+|6| Maximum temperature|-|
 
 ---
 
