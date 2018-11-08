@@ -30,7 +30,9 @@ In the current version (ver. 0.0), five output files are created after running t
 
 This file contains marginal probability function of the number of pulses. The format is 
 
-`<1st column: # of pulses> <2nd column: probability>`
+|1st column|2nd column|
+|:--:|:--:|
+|# of pulses|probability|
 
 
 ### Gr.ppd / Gz.ppd (ascii forat)
