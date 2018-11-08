@@ -27,13 +27,19 @@ The program, `mc3deconv`, assumes a parameter file, in which tuning parameters a
 |1| # of iterations in burn-in period|-|
 |2| # of iterations in sampling period|-| 
 |3| # of iterations per generating one sample|-|
-|4| # of McMC chains per process (for parallel tempering|-|
-|5| # of non-tempered chains|-|
-|6| Maximum temperature|-|
-|7| Input Z component file (in SAC format) | -|
-|8| Input R component file (in SAC format)|-|
-|9| Sampling interval of input data (sec)|-|
-|10|Start time of the analysis window relative to file beginning (s)| start time (s) | 
+|4| Your favorate number (used to initialize pseudo random numbers)||
+|5| # of McMC chains per process (for parallel tempering|-|
+|6| # of non-tempered chains|-|
+|7| Maximum temperature|-|
+|8| Input Z component file (in SAC format) | -|
+|9| Input R component file (in SAC format)|-|
+|10| Sampling interval of input data (sec)|-|
+|11|Start time of the analysis window relative to file beginning (s)| End time (s) |
+|12| Lower prior limit for # of pulses | Upper limit|
+|13| Lower prior limit for Z amplitude | Upper limit|
+|14| Lower prior limit for R amplitude | Upper limit|
+|15| Lower piror limit for pulse timing relative to P (s) | Upper limit|
+
 
 ---
 
