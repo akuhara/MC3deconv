@@ -14,7 +14,7 @@ More details can be found in [the paper by T. Akuhara (currently in revision)].
 
 Development of MC3deconv originally aims to acquire both radial (R) and vertical (Z) components of Green's functions. However, our experiments empirically suggest that the Z-component is not estimated correctly, while it provides relatively good estimation for the R-component.    
 
-Also, MC3deconv assumes noise in input data is distributed according to Gaussian distribution with no correlation over the time domain. The actual noise in real seismograms, however, has temporal correlation　undoubtly. 
+Also, MC3deconv assumes noise in input data is distributed according to Gaussian distribution with no correlation over the time domain. The actual noise in real seismograms, however, has temporal correlation undoubtly. 
 
 These limitations, as well as advantages, are discussed in [the paper by T. Akuhara (currently in revision)].
 
@@ -43,7 +43,7 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 |1| # of iterations in burn-in period|-|200000|-|
 |2| # of iterations in sampling period|-|1200000|-|
 |3| # of iterations per generating one sample|-|200|-|
-|4| Your favorate number (used to initialize pseudo random numbers)||21120903|-|
+|4| Your favorate number (used to initialize pseudo random numbers)||12345678|-|
 |5| # of McMC chains per process (for parallel tempering|-|10|-|
 |6| # of non-tempered chains|-|2|-|
 |7| Maximum temperature|-|100.0|-|
@@ -105,4 +105,4 @@ There are some sample data, which may be useful for testing the program.
 
 ## Acknowledgments
 
-Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2. A Program package, Parallel Tempering,  
+Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2.
