@@ -2,7 +2,7 @@
 
 This package provides an open code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-sided Green's functions, which is expected to similar to conventional receiver functions in ideal conditions) via MultiChannel deconvolution using reversible-jump Markov-Chain Mente Carlo (MC3deconv). 
 
-## What's MC3deconv? 
+## 1-1 What's MC3deconv? 
 
 One of the targets of seismology is to explore the Earth's subsurface structure using seismic waveforms. For extracting useful information from the waveforms, which usually look very complicated and tell us nothing, at first sight, the receiver function method was invented in the 1970s. It eliminates the incident wavelet shape from the seismograms by deconvolution, allowing us to easily detect useful signal such as P-to-S converted phases at seismic velocity discontinuities. Behind the many successful applications of this method, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples. 
 
@@ -10,7 +10,7 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 More details can be found in [the paper by T. Akuhara (currently in revision)].
 
-## Limitations so far
+## 1-2 Limitations so far
 
 Development of MC3deconv originally aims to acquire both radial (R) and vertical (Z) components of Green's functions. However, our experiments empirically suggest that the Z-component is not estimated correctly, while it provides relatively good estimation for the R-component.    
 
@@ -36,8 +36,7 @@ Run the program by `mpirun -np (# of processes) bin/mc3deconv`. Since one of the
 ---
 
 ## Input
-
-The program, `mc3deconv`, assumes a parameter file, in which tuning parameters and input data are specified, exists in the currenct directory with the name "params.in". The format of the parameter file is as below, but you can put comment lines, if necessary, that must start with "#".
+A parameter file, which sets tuning parameters and input data, etc., must exist in the working directory from which `mc3deconv` is called, with the name "params.in". The format of the parameter file is as below, but you can put comment lines that start with "#" if necessary.
 
 |Line #|parameter 1|parameter 2|Example value1| Example value2|
 |:--:|:--:|:--:|:--:|:--|
@@ -78,7 +77,7 @@ In the current version (ver. 0.0), five output files are created after running t
 
 ### dim.ppd (ascii format)
 
-This file contains marginal probability function of the number of pulses. The format is:
+The posterior probability distribution of the number of pulses. The format is:
 
 |1st column|2nd column|
 |:--:|:--:|
@@ -86,16 +85,14 @@ This file contains marginal probability function of the number of pulses. The fo
 
 
 ### Gr.ppd / Gz.ppd (ascii forat)
-
-These files includes the posterior probability distribution of R and Z component Green's functions. The format is:
+The posterior probability distribution of R and Z component Green's functions. The format is:
 
 |1st column|2nd column|3rd colmun|
 |:--:|:--:|:--:|
 |time after P (s)|amplitude|probability|`
 
 ### Gr.mean / Gz.mean (SAC format)
-
-These files includes the mean models of R and Z component Green's functions in [SAC](http://ds.iris.edu/files/sac-manual/) format.
+The mean models of R and Z component Green's functions in [SAC](http://ds.iris.edu/files/sac-manual/) format.
 
 ---
 
