@@ -4,19 +4,19 @@ This package provides an open code to perform deconvolution of teleseismic wavef
 
 ## What's MC3deconv? 
 
-One of the targets of seismology is to explore the Earth's subsurface structure using seismic waveforms. For xtracting useful information from the waveforms, which usually look very complicated and tell us nothing at first sight, the receiver function method was invented in the 1970s. The method eliminates the incident wavelet shape from the seismograms by deconvolution, allowing us to easily detect useful signal such as P-to-S converted phases at seismic velocity discontinuities. Behind the many successful applications of this method, there are well-known issues in the deconvolution process and related assumption that the incident wavelet must be approximated by its vertical component record. Due to this, receiver function methods get in trouble when analyzing data from ocean-bottom instruments where strong reverberations dominate the vertical component motion.    
+One of the targets of seismology is to explore the Earth's subsurface structure using seismic waveforms. For extracting useful information from the waveforms, which usually look very complicated and tell us nothing, at first sight, the receiver function method was invented in the 1970s. It eliminates the incident wavelet shape from the seismograms by deconvolution, allowing us to easily detect useful signal such as P-to-S converted phases at seismic velocity discontinuities. Behind the many successful applications of this method, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples. 
 
 The technique developed here, MC3deconv, nicely overcomes these issues. The method utilizes the equation of multichannel deconvolution, not requiring the problematic deconvolution and approximation of the incident wavelet. To regularize the inverse problem, receiver-sided Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
-More details can be found in [the paper by T. Akuhara].
+More details can be found in [the paper by T. Akuhara (currently in revision)].
 
 ## Limitations so far
 
 Development of MC3deconv originally aims to acquire both radial (R) and vertical (Z) components of Green's functions. However, our experiments empirically suggest that the Z-component is not estimated correctly, while it provides relatively good estimation for the R-component.    
 
-Also, MC3deconv assumes noise in input data is distributed according to Gaussian distribution with no correlation over the time domain. The actual noise in real seismograms, however, has some correlation in time (i.e., band-limited). 
+Also, MC3deconv assumes noise in input data is distributed according to Gaussian distribution with no correlation over the time domain. The actual noise in real seismograms, however, has temporal correlation　undoubtly. 
 
-These limitations, as well as advantages, are discussed in [the paper by T. Akuhara].
+These limitations, as well as advantages, are discussed in [the paper by T. Akuhara (currently in revision)].
 
 ---
 
@@ -100,7 +100,10 @@ These files includes the mean models of R and Z component Green's functions in [
 ---
 
 ## Samples
+There are some sample data to test the program.
+
 ### Sample1: Synthetic data
+
 ### Sample2: Real OBS data
 
 
