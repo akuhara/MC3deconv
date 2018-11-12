@@ -10,7 +10,7 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 More details can be found in [the paper by T. Akuhara (currently in revision)].
 
-## Limitations so far
+### Limitations so far
 
 * Development of MC3deconv originally aims to acquire both radial (R) and vertical (Z) components of Green's functions. However, our experiments empirically suggest that the Z-component is not estimated correctly, while it provides relatively good estimation for the R-component.
 * MC3deconv assumes noise in input data is distributed according to Gaussian distribution with no correlation over the time domain. The actual noise in real seismograms, however, has temporal correlation undoubtly. 
