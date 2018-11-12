@@ -99,8 +99,8 @@ The mean models of R and Z component Green's functions in [SAC](http://ds.iris.e
 ## Samples
 There are some sample data, which may be useful for testing the program.
 
-*Sample1: Synthetic data
-*Sample2: Real OBS data
+* Sample1: Synthetic data
+* Sample2: Real OBS data
 
 
 ## Acknowledgments
