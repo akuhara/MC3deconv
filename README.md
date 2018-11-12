@@ -2,7 +2,7 @@
 
 This package provides an open code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-sided Green's functions, which is expected to similar to conventional receiver functions in ideal conditions) via MultiChannel deconvolution using reversible-jump Markov-Chain Mente Carlo (MC3deconv). 
 
-## 1-1 What's MC3deconv? 
+## What's MC3deconv? 
 
 One of the targets of seismology is to explore the Earth's subsurface structure using seismic waveforms. For extracting useful information from the waveforms, which usually look very complicated and tell us nothing, at first sight, the receiver function method was invented in the 1970s. It eliminates the incident wavelet shape from the seismograms by deconvolution, allowing us to easily detect useful signal such as P-to-S converted phases at seismic velocity discontinuities. Behind the many successful applications of this method, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples. 
 
@@ -10,7 +10,7 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 More details can be found in [the paper by T. Akuhara (currently in revision)].
 
-## 1-2 Limitations so far
+## Limitations so far
 
 Development of MC3deconv originally aims to acquire both radial (R) and vertical (Z) components of Green's functions. However, our experiments empirically suggest that the Z-component is not estimated correctly, while it provides relatively good estimation for the R-component.    
 
@@ -97,13 +97,12 @@ The mean models of R and Z component Green's functions in [SAC](http://ds.iris.e
 ---
 
 ## Samples
-There are some sample data to test the program.
+There are some sample data, which may be useful for testing the program.
 
-### Sample1: Synthetic data
-
-### Sample2: Real OBS data
+*Sample1: Synthetic data
+*Sample2: Real OBS data
 
 
 ## Acknowledgments
 
-OBS data in sample 2 are collected by K. Nakahigashi and T. Yamada. 
+Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2. A Program package, Parallel Tempering,  
