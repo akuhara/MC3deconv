@@ -42,9 +42,9 @@ module params
   integer, parameter :: io_dim   = 50
   integer, parameter :: io_ini   = 70
   integer, parameter :: io_ini2  = 80
-  real, parameter :: eps = 1.0e-5
-  real(8), parameter :: pi = 3.1415926535897931
-  real(8), parameter :: pi2 = pi * 2.d0
+  real(kind(0d0)), parameter :: eps = 1.0e-5
+  real(kind(0d0)), parameter :: pi = 3.1415926535897931
+  real(kind(0d0)), parameter :: pi2 = pi * 2.d0
 
   !********************************************************************
   ! General
@@ -57,18 +57,8 @@ module params
   ! Temperature
   !********************************************************************
   integer :: nchains, ncool
-  real(8) :: Thigh
-  integer, parameter :: ialg = 0
-  ! Algorithm type: 
-  ! ialg=0, Parallel Tempering with T swap between all levels 
-  ! ialg=2, Parallel Tempering with T swap only allowed between 
-  !         neighbouring temperature levels 
-  real, parameter :: swaprate = 1.0
-  ! Rate at which exchange swaps are proposed relative to within
-  ! chain steps. 
-  ! swaprate = 1.0 : one exchage swap proposed for every McMC step.
-  ! swaprate = 0.0 : Turn off parallel tempering 
-
+  real(kind(0d0)) :: Thigh
+  
   !********************************************************************
   ! Iteration
   !********************************************************************
@@ -81,48 +71,48 @@ module params
   !********************************************************************
   integer, allocatable :: nsp(:)
   integer, allocatable :: idt(:,:)
-  real, allocatable :: amp(:,:,:)
+  real(kind(0d0)), allocatable :: amp(:,:,:)
   
   !********************************************************************
   ! Observation
   !********************************************************************
   character(200), dimension(2) :: obs_files
-  real :: delta
-  real :: t1, t2
+  real(kind(0d0)) :: delta
+  real(kind(0d0)) :: t1, t2
   integer :: nsmp
-  real, allocatable :: u(:,:)
+  real(kind(0d0)), allocatable :: u(:,:)
 
   !********************************************************************
   ! Green's functions
   !********************************************************************
   integer :: ngrn
   integer :: ntpre
-  real :: a_gus
+  real(kind(0d0)) :: a_gus
   integer :: nflt
-  real, allocatable :: flt(:)
+  real(kind(0d0)), allocatable :: flt(:)
 
   !********************************************************************
   ! Prior
   !********************************************************************
   integer :: nsp_min, nsp_max, del_nsp
-  real :: amp_min(ncmp), amp_max(ncmp), del_amp(ncmp)
+  real(kind(0d0)) :: amp_min(ncmp), amp_max(ncmp), del_amp(ncmp)
   integer :: idt_min, idt_max, del_idt
 
   !********************************************************************
   ! Proposal
   !********************************************************************
-  real :: p_birth, p_death, p_shift, p_perturb
+  real(kind(0d0)) :: p_birth, p_death, p_shift, p_perturb
   
   !********************************************************************
   ! display
   !********************************************************************
-  real    :: abin_min, abin_max, dabin
+  real(kind(0d0)) :: abin_min, abin_max, dabin
   integer :: nabin
 
   !********************************************************************
   ! Perturbation
   !********************************************************************
-  real :: sdv_amp(ncmp), sdv_dt, sdv_birth(ncmp)
+  real(kind(0d0)) :: sdv_amp(ncmp), sdv_dt, sdv_birth(ncmp)
   
   !********************************************************************
   ! Counters
@@ -136,8 +126,8 @@ module params
   !********************************************************************
   ! PPD storage
   !********************************************************************
-  real(8), allocatable :: logPPDstore(:)
-  real(8), allocatable :: ur_gz(:,:), uz_gr(:,:)
+  real(kind(0d0)), allocatable :: logPPDstore(:)
+  real(kind(0d0)), allocatable :: ur_gz(:,:), uz_gr(:,:)
 
 end module params
 
@@ -147,8 +137,8 @@ subroutine read_param(paramfile)
   implicit none 
   character(*), intent(in) :: paramfile
   character(100) :: line
-  real :: dt_min, dt_max, tt1, tt2, t_gus
-  integer :: ierr, i, it1, it2
+  real(kind(0d0)) :: dt_min, dt_max, tt1, tt2, t_gus
+  integer :: ierr, it1, it2
   
   ! Open parameter file
   open(io_param, file = paramfile, iostat = ierr, status = 'old')
@@ -229,12 +219,12 @@ subroutine read_param(paramfile)
   call get_line(io_param, line)
   read(line, *) a_gus
   call get_line(io_param, line)
-  t_gus = 1.0 / (sqrt(2.0) * a_gus)
-  nflt = int(5.0 * t_gus / delta)
+  t_gus = 1.d0 / (sqrt(2.d0) * a_gus)
+  nflt = int(5.d0 * t_gus / delta)
   read(line, *) abin_min, abin_max
   call get_line(io_param, line)
   read(line, *) dabin
-  nabin = (abin_max - abin_min) / real(dabin)
+  nabin = nint((abin_max - abin_min) / real(dabin))
 
   close(io_param)
 

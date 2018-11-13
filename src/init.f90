@@ -29,10 +29,10 @@ subroutine init()
   use mt19937
   implicit none 
   integer :: ichain, i, icmp, isp, n, ierr
-  real :: maxamp, t, ar, az
+  real(kind(0d0)) :: maxamp, t, ar, az
   logical :: output_ini_model, give_ini_model ! for debug
-  real, allocatable :: ini_gr(:), ini_gz(:)
-  real(8), allocatable :: tmp(:)
+  real(kind(0d0)), allocatable :: ini_gr(:), ini_gz(:)
+  real(kind(0d0)), allocatable :: tmp(:)
   
   character(200) :: ini_file
 
@@ -131,7 +131,7 @@ subroutine init()
         do icmp = 1, ncmp
            do isp = 0, nsp(ichain)
               amp(isp, icmp, ichain) = amp_min(icmp) + &
-                   & real(grnd()) * del_amp(icmp)
+                   & grnd() * del_amp(icmp)
            end do
         end do
      end if

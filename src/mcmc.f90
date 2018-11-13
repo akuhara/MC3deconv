@@ -29,17 +29,17 @@ subroutine mcmc(ichain, T, logPPD)
   use mt19937
   use params
   implicit none 
-  real(8), intent(out) :: logPPD
-  real(8), intent(in)  :: T
+  real(kind(0d0)), intent(out) :: logPPD
+  real(kind(0d0)), intent(in)  :: T
   integer, intent(in)  :: ichain
   integer :: itype, icmp, tmp_nsp, itarget, isp
   integer :: nsp_test, idt_test(0:nsp_max), tmp_idt
-  real :: amp_test(0:nsp_max, ncmp), tmp_ampr, tmp_ampz
-  real(8) :: ur_gz_test(nsmp), uz_gr_test(nsmp), tmp_ug(nsmp)
-  real :: tmp_amp, tmp_damp
-  real(8) :: logQratio, p_rand
+  real(kind(0d0)) :: amp_test(0:nsp_max, ncmp), tmp_ampr, tmp_ampz
+  real(kind(0d0)) :: ur_gz_test(nsmp), uz_gr_test(nsmp), tmp_ug(nsmp)
+  real(kind(0d0)) :: tmp_amp, tmp_damp
+  real(kind(0d0)) :: logQratio, p_rand
   logical :: null_flag, accept_flag
-  real(8), external :: gauss
+  real(kind(0d0)), external :: gauss
 
   
   
@@ -269,11 +269,11 @@ end subroutine mcmc
 
 !=======================================================================
 
-real(8) function gauss()
+real(kind(0d0)) function gauss()
   use params, only: pi2
   use mt19937
   implicit none 
-  real(8) :: v1, v2
+  real(kind(0d0)) :: v1, v2
   
   v1 = grnd() 
   v2 = grnd()
@@ -291,7 +291,7 @@ subroutine record_model(ichain)
   implicit none 
   integer, intent(in) :: ichain
   integer :: icmp, n, it, ibin
-  real :: g(ngrn, ncmp)
+  real(kind(0d0)) :: g(ngrn, ncmp)
   
   ! Low-pass filtered Green's functions
   n = nsp(ichain)
@@ -326,9 +326,9 @@ end subroutine record_model
 subroutine judge_mcmc(temp, logPPD1, logPPD2, logQratio, yn)
   use mt19937
   implicit none
-  real(8), intent(in) :: temp, logPPD1, logPPD2, logQratio
+  real(kind(0d0)), intent(in) :: temp, logPPD1, logPPD2, logQratio
   logical, intent(out) :: yn
-  real(8) :: del_s
+  real(kind(0d0)) :: del_s
   
   yn = .false.
   del_s = (logPPD2 - logPPD1) / temp

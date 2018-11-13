@@ -32,10 +32,10 @@ subroutine output()
   integer :: naccept_sum(ntype), nprop_sum(ntype)
   integer, allocatable :: nsp_count_sum(:)
   integer, allocatable :: green_count_sum(:,:,:)
-  real, allocatable :: green_mean(:,:), p(:), w(:)
+  real(kind(0d0)), allocatable :: green_mean(:,:), p(:), w(:)
   character(100), dimension(ncmp) :: ppd_files, mean_files
   character(100) :: dim_file
-  real :: t, y
+  real(kind(0d0)) :: t, y
 
 
 
@@ -134,15 +134,15 @@ subroutine output()
         do i = 1, 158
            write(io_mean, rec=i)-12345
         end do
-        write(io_mean, rec = 1) delta
-        write(io_mean, rec = 6) -ntpre * delta
-        write(io_mean, rec = 7) (ngrn - ntpre) * delta ! e
+        write(io_mean, rec = 1) real(delta, kind(0e0))
+        write(io_mean, rec = 6) real(-ntpre * delta, kind(0e0))
+        write(io_mean, rec = 7) real((ngrn - ntpre) * delta, kind(0e0)) ! e
         write(io_mean, rec = 77) 6 ! nvhdr
         write(io_mean, rec = 86) 1 ! iftype
         write(io_mean, rec = 80) ngrn
         write(io_mean, rec = 106) 1 ! leven
         do it = 1, ngrn
-           write(io_mean, rec = 158 + it) green_mean(it,icmp)
+           write(io_mean, rec = 158 + it) real(green_mean(it,icmp), kind(0e0))
         end do
         
 

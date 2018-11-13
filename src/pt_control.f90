@@ -29,13 +29,13 @@ subroutine pt_control(chaintemp)
   use mt19937
   implicit none
   include "mpif.h"
-  real(8), intent(inout) :: chaintemp(nchains)
-  real(8) :: logPPD(nchains)
+  real(kind(0d0)), intent(inout) :: chaintemp(nchains)
+  real(kind(0d0)) :: logPPD(nchains)
   integer :: status(MPI_STATUS_SIZE), ierr, rank1, rank2
   integer :: ichain1, ichain2, ichain
   integer :: it, n_all, itarget1, itarget2, ipack(4), n_iter
-  real(8) :: temp1, e1, temp2, e2, temp, e
-  real(8) :: rpack(2)
+  real(kind(0d0)) :: temp1, e1, temp2, e2, temp, e
+  real(kind(0d0)) :: rpack(2)
   logical :: yn
 
 
@@ -128,9 +128,9 @@ end subroutine pt_control
 subroutine judge_pt(temp1, temp2, lp1, lp2, yn)
   use mt19937
   implicit none 
-  real(8), intent(in) :: temp1, temp2, lp1, lp2
+  real(kind(0d0)), intent(in) :: temp1, temp2, lp1, lp2
   logical, intent(out) :: yn
-  real(8) :: del_s
+  real(kind(0d0)) :: del_s
   
   del_s = (lp2 - lp1) * (1.d0 / temp1 - 1.d0 / temp2)
   yn = .false.

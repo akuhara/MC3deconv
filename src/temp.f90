@@ -24,21 +24,20 @@
 !           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
 !
 !=======================================================================
-subroutine set_temp(nchains, ncool, Tlow, Thigh, Chaintemp)
+subroutine set_temp(nchains, ncool, Thigh, Chaintemp)
   use mt19937
   implicit none 
   integer, intent(in)  :: nchains, ncool
-  real(8), intent(out) :: chaintemp(nchains)
-  real(8), intent(in)  :: Tlow,Thigh
+  real(kind(0d0)), intent(out) :: chaintemp(nchains)
+  real(kind(0d0)), intent(in)  :: Thigh
   integer :: it
-  real(8) :: lt1, lt2
+  real(kind(0d0)) :: lt2
   
-  lt1 = log(Tlow)
   lt2 = log(Thigh)
   do it = ncool + 1, nchains
-     chaintemp(it) = exp(lt1 + grnd()*(lt2 - lt1))
+     chaintemp(it) = exp(grnd()* lt2)
   end do
-  chaintemp(1:ncool) = Tlow                   ! Force first chain to be at Tlow
+  chaintemp(1:ncool) = 1.d0
   
   return
 end subroutine set_temp

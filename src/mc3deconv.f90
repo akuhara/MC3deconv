@@ -28,11 +28,9 @@ program mc3deconv
   use params
   implicit none 
   include "mpif.h"
-  integer :: ierr,i 
-  integer :: nbins = 10
-  real(8), allocatable :: chaintemp(:)
-  real(8) :: Tlow = 1.d0
-  integer :: from, tag
+  integer :: ierr
+  real(kind(0d0)), allocatable :: chaintemp(:)
+  
   ! Initialize MPI 
   call mpi_init(ierr)
   call mpi_comm_size(MPI_COMM_WORLD, nproc, ierr)
@@ -49,7 +47,7 @@ program mc3deconv
   
   allocate(chaintemp(nchains))
   
-  call set_temp(nchains, ncool, Tlow, Thigh, chaintemp)
+  call set_temp(nchains, ncool, Thigh, chaintemp)
   
   call pt_control(chaintemp)
     

@@ -5,7 +5,7 @@ MF90      = mpif90
 FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check  
 
 # GNU fortran compiler (for debug)
-# FFLAGS = -pg -Wall -fbounds-check -O -Wuninitialized \
+#FFLAGS = -pg -Wall -pedantic -std=f95 -fbounds-check -O -Wuninitialized \
             -ffpe-trap=invalid,zero,overflow -fbacktrace \
             -fno-range-check 
 

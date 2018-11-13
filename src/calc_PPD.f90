@@ -27,10 +27,10 @@
 subroutine calc_PPD(n, cnv1, cnv2, log_ppd)
   use params
   implicit none
-  real(8), intent(out) :: log_ppd
+  real(kind(0d0)), intent(out) :: log_ppd
   integer, intent(in) :: n
-  real(8), intent(in) :: cnv1(nsmp), cnv2(nsmp)
-  real(8) :: res, dif, log_prior, log_lklh, fact
+  real(kind(0d0)), intent(in) :: cnv1(nsmp), cnv2(nsmp)
+  real(kind(0d0)) :: res, dif, log_prior, log_lklh, fact
   integer :: it, isp
   
 

@@ -29,7 +29,8 @@ subroutine read_data()
   use params
   implicit none 
   integer :: icmp, ierr, npts, it1, i
-  real :: tmp_delta
+  real(kind(0e0)) :: tmp_delta
+  real(kind(0e0)) :: tmp_data
 
   it1 = nint(t1 / delta) + 1
 
@@ -61,9 +62,10 @@ subroutine read_data()
      end if
      
      do i = 1, nsmp
-        read(io_obs, rec = 158 + it1 + i - 1) u(i,icmp)
+        read(io_obs, rec = 158 + it1 + i - 1) tmp_data
+        u(i, icmp) = dble(tmp_data)
      end do
-     
+
      close(io_obs)
 
   end do

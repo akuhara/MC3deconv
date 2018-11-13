@@ -27,9 +27,9 @@
 subroutine conv_waveform(n, xin, it, a, obj, xout)
   implicit none
   integer, intent(in) :: it, n
-  real(8), intent(in) :: xin(n)
-  real, intent(in) :: a, obj(n)
-  real(8), intent(out) :: xout(n)
+  real(kind(0d0)), intent(in) :: xin(n)
+  real(kind(0d0)), intent(in) :: a, obj(n)
+  real(kind(0d0)), intent(out) :: xout(n)
   integer :: i, iend
 
   
@@ -49,10 +49,10 @@ end subroutine conv_waveform
 subroutine conv_gauss(nsp, idt, amp, nflt, flt, nout, npre, xout)
   implicit none
   integer, intent(in) :: nsp, idt(0:nsp), nout, nflt, npre
-  real, intent(in) :: amp(0:nsp), flt(-nflt:nflt)  
-  real, intent(out) :: xout(nout)
+  real(kind(0d0)), intent(in) :: amp(0:nsp), flt(-nflt:nflt)  
+  real(kind(0d0)), intent(out) :: xout(nout)
   integer :: isp, j, it
-  real    :: a
+  real(kind(0d0))    :: a
   
   xout(1:nout) = 0.0
   do isp = 0, nsp
