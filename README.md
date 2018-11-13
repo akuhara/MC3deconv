@@ -1,10 +1,10 @@
 # MultiChannel deconvolution by reversible-jump Markov-Chain Monte Carlo (MC3deoncv)
 
-This package provides an open code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-sided Green's functions, which is expected to similar to conventional receiver functions in ideal conditions) via MultiChannel deconvolution using reversible-jump Markov-Chain Mente Carlo (MC3deconv). 
+This package provides a fortran code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-sided Green's functions, which is expected te be equal to conventional receiver functions in ideal conditions) through MultiChannel deconvolution using reversible-jump Markov-Chain Mente Carlo (MC3deconv). 
 
 ## What's MC3deconv? 
 
-One of the targets of seismology is to explore the Earth's subsurface structure using seismic waveforms. For extracting useful information from the waveforms, which usually look very complicated and tell us nothing, at first sight, the receiver function method was invented in the 1970s. It eliminates the incident wavelet shape from the seismograms by deconvolution, allowing us to easily detect useful signal such as P-to-S converted phases at seismic velocity discontinuities. Behind the many successful applications of this method, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples. 
+One of the purposes of seismology is to explore the Earth's subsurface structure using seismic waveforms. The receiver function method was invented in the 1970s for extracting useful information from the waveforms. The method eliminates the incident wavelet shape from the teleseismic waveforms by deconvolution that enables to detect useful signal such as P-to-S converted phases. Behind the many successful applications, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples. 
 
 The technique developed here, MC3deconv, nicely overcomes these issues. The method utilizes the equation of multichannel deconvolution, not requiring the problematic deconvolution and approximation of the incident wavelet. To regularize the inverse problem, receiver-sided Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
