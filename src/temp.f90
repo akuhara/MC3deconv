@@ -1,17 +1,42 @@
+!=======================================================================
+!   MC3deconv: 
+!   Multichannel deconvolution by reversible-jump Malkov-chain Monte Carlo
+!   Copyright (C) 2018 Takeshi Akuhara
+!
+!   This program is free software: you can redistribute it and/or modify
+!   it under the terms of the GNU General Public License as published by
+!   the Free Software Foundation, either version 3 of the License, or
+!   (at your option) any later version.
+!
+!   This program is distributed in the hope that it will be useful,
+!   but WITHOUT ANY WARRANTY; without even the implied warranty of
+!   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+!   GNU General Public License for more details.
+!
+!   You should have received a copy of the GNU General Public License
+!   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+!
+!
+!   Contact information
+!
+!   Email : akuhara@eri.u-tokyo.ac.jp 
+!   Adress: Earthquake Research Institute, The Univesity of Tokyo
+!           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
+!
+!=======================================================================
 subroutine set_temp(nchains, ncool, Tlow, Thigh, Chaintemp)
   use mt19937
   implicit none 
-  include "mpif.h"
   integer, intent(in)  :: nchains, ncool
   real(8), intent(out) :: chaintemp(nchains)
   real(8), intent(in)  :: Tlow,Thigh
   integer :: it
-  real(8) :: aval, bval
+  real(8) :: lt1, lt2
   
-  aval = log(Tlow)
-  bval = log(Thigh)
+  lt1 = log(Tlow)
+  lt2 = log(Thigh)
   do it = ncool + 1, nchains
-     chaintemp(it) = exp(aval + grnd()*(bval-aval))
+     chaintemp(it) = exp(lt1 + grnd()*(lt2 - lt1))
   end do
   chaintemp(1:ncool) = Tlow                   ! Force first chain to be at Tlow
   

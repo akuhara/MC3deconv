@@ -1,10 +1,7 @@
-!======================================================================= 
-!
-!
-! init: Initialize variables 
-!
-! 
-! Copyright (c) 2018 Takeshi Akuhara
+!=======================================================================
+!   MC3deconv: 
+!   Multichannel deconvolution by reversible-jump Malkov-chain Monte Carlo
+!   Copyright (C) 2018 Takeshi Akuhara
 !
 !   This program is free software: you can redistribute it and/or modify
 !   it under the terms of the GNU General Public License as published by
@@ -20,14 +17,13 @@
 !   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !
 !
-! Contact information
+!   Contact information
 !
 !   Email : akuhara@eri.u-tokyo.ac.jp 
 !   Adress: Earthquake Research Institute, The Univesity of Tokyo
 !           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
-! 
+!
 !=======================================================================
-
 subroutine init()
   use params
   use mt19937
