@@ -21,7 +21,7 @@ subroutine pt_control(chaintemp)
         ! within-chain step for all chains
         do ichain = 1, nchains
            temp = chaintemp(ichain)
-           call AdvanceChain(ichain, temp, e)
+           call mcmc(ichain, temp, e)
            logPPD(ichain) = e
         end do
         call mpi_bcast(ipack, 4, MPI_INTEGER4, 0, &
@@ -36,7 +36,7 @@ subroutine pt_control(chaintemp)
            temp2 = chaintemp(ichain2)
            e1    = logPPD(ichain1)
            e2    = logPPD(ichain2)
-           call tswap_accept(temp1, temp2, e1, e2, yn)
+           call judge_pt(temp1, temp2, e1, e2, yn)
            if (yn) then
               chaintemp(ichain2) = temp1
               chaintemp(ichain1) = temp2
@@ -50,7 +50,7 @@ subroutine pt_control(chaintemp)
            temp2 = rpack(1)
            e1 = logPPD(ichain1)
            e2 = rpack(2)
-           call tswap_accept(temp1, temp2, e1, e2, yn)
+           call judge_pt(temp1, temp2, e1, e2, yn)
            !write(*,*)temp1, temp2, e1, e2, yn
            if (yn) then
               chaintemp(ichain1) = temp2
@@ -99,17 +99,14 @@ end subroutine pt_control
 
 !=======================================================================
 
-subroutine tswap_accept(temp1, temp2, e1, e2, yn)
+subroutine judge_pt(temp1, temp2, lp1, lp2, yn)
   use mt19937
   implicit none 
-  real(8), intent(in) :: temp1, temp2, e1, e2
+  real(8), intent(in) :: temp1, temp2, lp1, lp2
   logical, intent(out) :: yn
-  real(8) :: del_t, del_s, del_e
-  real(8) :: a
+  real(8) :: del_s
   
-  del_e = e1 - e2
-  del_t = 1.d0 / temp1 - 1.d0 / temp2
-  del_s = del_e * del_t
+  del_s = (lp2 - lp1) * (1.d0 / temp1 - 1.d0 / temp2)
   yn = .false.
 
   if(log(grnd()) <= del_s) then
@@ -117,24 +114,5 @@ subroutine tswap_accept(temp1, temp2, e1, e2, yn)
   end if
   
   return 
-end subroutine tswap_accept
+end subroutine judge_pt
 
-!=======================================================================
-
-subroutine pt_mcmc_accept(temp, logPPD1, logQ12, logPPD2, logQ21, yn)
-  use mt19937
-  implicit none
-  real(8), intent(in) :: temp, logPPD1, logQ12, logPPD2, logQ21
-  logical, intent(out) :: yn
-  real(8) :: del_s
-  
-  yn = .false.
-  del_s = (logPPD1 - logPPD2) / temp
-  del_s = del_s + logQ12 - logQ21
-
-  if (log(grnd()) <= del_s) then
-     yn = .true.
-  end if
-  
-  return 
-end subroutine pt_mcmc_accept

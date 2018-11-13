@@ -23,16 +23,16 @@
 !
 !=======================================================================
 
-subroutine advancechain(ichain, T, logPPD)
-  implicit none 
-  real(8), intent(out) :: logPPD
-  real(8), intent(in)  :: T
-  integer, intent(in)  :: ichain
-  
-  call mcmc(ichain, T, logPPD)
-  
-  return 
-end subroutine advancechain
+!subroutine advancechain(ichain, T, logPPD)
+!  implicit none 
+!  real(8), intent(out) :: logPPD
+!  real(8), intent(in)  :: T
+!  integer, intent(in)  :: ichain
+!  
+!  call mcmc(ichain, T, logPPD)
+!  
+!  return 
+!end subroutine advancechain
 
 !=======================================================================
 
@@ -47,7 +47,7 @@ subroutine mcmc(ichain, T, logPPD)
   integer :: nsp_test, idt_test(0:nsp_max), tmp_idt
   real :: amp_test(0:nsp_max, ncmp), tmp_ampr, tmp_ampz
   real :: tmp_amp
-  real(8) :: logQ12, logQ21, p_rand
+  real(8) :: logQratio, p_rand
   logical :: null_flag, accept_flag
   real(8), external :: gauss
 
@@ -64,8 +64,8 @@ subroutine mcmc(ichain, T, logPPD)
   nsp_test  = nsp(ichain)
   idt_test(:)  = idt(:,ichain)
   amp_test(:,:)  = amp(:,:,ichain)
-  logQ12 = 0.d0
-  logQ21 = 0.d0
+  logQratio = 0.d0
+
 
   !************
   ! Proposal
@@ -104,14 +104,14 @@ subroutine mcmc(ichain, T, logPPD)
         amp_test(tmp_nsp, ir) = tmp_ampr
         amp_test(tmp_nsp, iz) = tmp_ampz
 
-        logQ12 = -log(dble(tmp_nsp))
-        logQ12 = logQ12 + log(dble(del_idt) * delta)
-        logQ12 = logQ12 - & 
+        logQratio = -log(dble(tmp_nsp))
+        logQratio = logQratio + log(dble(del_idt) * delta)
+        logQratio = logQratio - & 
              & (                                       &
              & -log(sdv_birth(ir)) - 0.5 * log(pi2) -  &
              & tmp_ampr**2 / (2.0 * sdv_birth(ir)**2)  &
              & )
-        logQ12 = logQ12 - &
+        logQratio = logQratio - &
              & (                                       &
              & -log(sdv_birth(iz)) - 0.5 * log(pi2) -  &
              & tmp_ampz**2 / (2.0 * sdv_birth(iz)**2)  &
@@ -130,14 +130,14 @@ subroutine mcmc(ichain, T, logPPD)
         tmp_ampr = amp_test(itarget, ir)
         tmp_ampz = amp_test(itarget, iz)
         
-        logQ12 = log(dble(tmp_nsp + 1))
-        logQ12 = logQ12 - log(dble(del_idt) * delta)
-        logQ12 = logQ12 + &
+        logQratio = log(dble(tmp_nsp + 1))
+        logQratio = logQratio - log(dble(del_idt) * delta)
+        logQratio = logQratio + &
              & (                                       &
              & -log(sdv_birth(ir)) - 0.5 * log(pi2) -  &
              & tmp_ampr**2 / (2.0 * sdv_birth(ir)**2)  &
              & )
-        logQ12 = logQ12 + &
+        logQratio = logQratio + &
              & (                                       &
              & -log(sdv_birth(iz)) - 0.5 * log(pi2) -  &
              & tmp_ampz**2 / (2.0 * sdv_birth(iz)**2)  &
@@ -186,9 +186,9 @@ subroutine mcmc(ichain, T, logPPD)
   !*******
 
   if (.not. null_flag) then
-     call calclogPPD(nsp_test, idt_test, amp_test, logPPD)
-     call pt_mcmc_accept(T, logPPDstore(ichain), logQ12, logPPD, &
-          & logQ21, accept_flag)
+     call calc_PPD(nsp_test, idt_test, amp_test, logPPD)
+     call judge_mcmc(T, logPPDstore(ichain), logPPD, &
+          & logQratio, accept_flag)
   else
      accept_flag = .false.
   end if
@@ -288,3 +288,22 @@ subroutine record_model(ichain)
   return 
 end subroutine record_model
   
+!=======================================================================
+
+subroutine judge_mcmc(temp, logPPD1, logPPD2, logQratio, yn)
+  use mt19937
+  implicit none
+  real(8), intent(in) :: temp, logPPD1, logPPD2, logQratio
+  logical, intent(out) :: yn
+  real(8) :: del_s
+  
+  yn = .false.
+  del_s = (logPPD2 - logPPD1) / temp
+  del_s = del_s + logQratio
+
+  if (log(grnd()) <= del_s) then
+     yn = .true.
+  end if
+  
+  return 
+end subroutine judge_mcmc

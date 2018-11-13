@@ -22,7 +22,7 @@ BINDIR    = ./bin
 TARGET    = $(BINDIR)/mc3deconv
 OBJS      = src/mc3deconv.o src/params.o src/mcmc.o \
             src/init.o src/pt_control.o src/mt19937.o src/read_data.o \
-	    src/calclogPPD.o src/conv.o src/temp.o src/output.o 
+	    src/calc_PPD.o src/conv.o src/temp.o src/output.o 
 
 all: $(TARGET) 
 
@@ -35,7 +35,7 @@ src/mc3deconv.o: params.mod
 src/mcmc.o:     params.mod mt19937.mod
 src/init.o:     params.mod mt19937.mod
 src/read_data.o: params.mod
-src/calclogPPD.o: params.mod
+src/calc_PPD.o: params.mod
 src/temp.o: mt19937.mod
 src/output.o: params.mod
 

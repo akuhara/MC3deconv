@@ -158,7 +158,7 @@ subroutine init()
      
      
      ! calculate PPD
-     call calclogPPD(nsp(ichain), idt(:, ichain), &
+     call calc_PPD(nsp(ichain), idt(:, ichain), &
           & amp(:, :, ichain), logPPDstore(ichain))
      
   end do

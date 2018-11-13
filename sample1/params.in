@@ -1,14 +1,11 @@
-#------------------------------------------------------------
-# 1.  Iteration number
-#------------------------------------------------------------
-# Number of burn-in period
-  100000
-# Number of sample period
-  500000
-# Interval of model sampling
-  100
-# Random number seeds 
-  444335008
+# Number of iterations in burn-in period
+  200000
+# Number of iterations in sampling period
+  1000000
+# Number of iterations
+  200
+# Random seed
+  12345678
 #------------------------------------------------------------
 # 2.  Prallel tempering
 #------------------------------------------------------------
