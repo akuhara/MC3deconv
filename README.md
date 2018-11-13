@@ -42,14 +42,14 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 |1| # of iterations in burn-in period|-|200000|-|
 |2| # of iterations in sampling period|-|1200000|-|
 |3| # of iterations per generating one sample|-|200|-|
-|4| Your favorate number (used to initialize pseudo random numbers)||12345678|-|
+|4| Random seed|-|12345678|-|
 |5| # of McMC chains per process (for parallel tempering|-|10|-|
 |6| # of non-tempered chains|-|2|-|
 |7| Maximum temperature|-|100.0|-|
 |8| Input Z component file (in SAC format) | -|input/syn_obs.z|-|
 |9| Input R component file (in SAC format)|-|input/syn_obs.r|-|
 |10| Sampling interval of input data (sec)|-|0.05|-|
-|11|Start time of the analysis window relative to file beginning (s)| End time (s) |195.0|255.0|
+|11| Start time of the analysis window relative to file beginning (s)| End time (s) |195.0|255.0|
 |12| Lower prior limit for # of pulses | Upper limit|1|101|
 |13| Lower prior limit for Z amplitude | Upper limit|-0.8|0.8|
 |14| Lower prior limit for R amplitude | Upper limit|-0.8|0.8|
