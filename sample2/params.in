@@ -13,9 +13,9 @@
 # Maximum temperature
   100.0
 # Input Z component file (in SAC format)
-  input/syn_obs.z 
+  input/150727.044946.40.z
 # Input R component file (in SAC format)
-  input/syn_obs.r
+  input/150727.044946.40.r
 # Sampling interval of input data (sec)
   0.05
 # Start/end time of analysis window (sec)

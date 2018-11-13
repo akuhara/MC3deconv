@@ -107,6 +107,7 @@ subroutine mcmc(ichain, T, logPPD)
              & -log(sdv_birth(iz)) - 0.5 * log(pi2) -  &
              & tmp_ampz**2 / (2.0 * sdv_birth(iz)**2)  &
              & )
+        logQratio = logQratio + log(p_death / p_birth)
 
         call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
              & idt_test(tmp_nsp), tmp_ampz, &
@@ -141,7 +142,7 @@ subroutine mcmc(ichain, T, logPPD)
              & -log(sdv_birth(iz)) - 0.5 * log(pi2) -  &
              & tmp_ampz**2 / (2.0 * sdv_birth(iz)**2)  &
              & )
-        
+        logQratio = logQratio + log(p_birth / p_death)
         call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
              & idt_test(itarget), -tmp_ampz, &
              & u(1:nsmp, ir), ur_gz_test)
