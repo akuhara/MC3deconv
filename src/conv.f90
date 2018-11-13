@@ -24,24 +24,23 @@
 !           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
 !
 !=======================================================================
-subroutine conv_waveform(nsp, idt, amp, nout, obj, xout)
+subroutine conv_waveform(n, xin, it, a, obj, xout)
   implicit none
-  integer, intent(in) :: nsp, idt(0:nsp), nout
-  real, intent(in) :: amp(0:nsp), obj(nout)
-  real, intent(out) :: xout(nout)
-  integer :: isp, iobj, it
-  real    :: a
+  integer, intent(in) :: it, n
+  real(8), intent(in) :: xin(n)
+  real, intent(in) :: a, obj(n)
+  real(8), intent(out) :: xout(n)
+  integer :: i, iend
+
   
-  xout = 0.0
-  do isp = 0, nsp
-     it = idt(isp)
-     a = amp(isp)
-     do iobj = 1, min(nout,nout-it+1)
-        xout(it+iobj-1) = xout(it+iobj-1) + a * obj(iobj)
-     end do
+  xout(1:n) = xin(1:n)
+  
+  iend = min(n, n - it + 1)
+  do i = 1, iend
+     xout(it + i -1) = xout(it + i - 1) + a * obj(i)
   end do
   
-
+  
   return
 end subroutine conv_waveform
 

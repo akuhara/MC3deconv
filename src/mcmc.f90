@@ -35,7 +35,8 @@ subroutine mcmc(ichain, T, logPPD)
   integer :: itype, icmp, tmp_nsp, itarget, isp
   integer :: nsp_test, idt_test(0:nsp_max), tmp_idt
   real :: amp_test(0:nsp_max, ncmp), tmp_ampr, tmp_ampz
-  real :: tmp_amp
+  real(8) :: ur_gz_test(nsmp), uz_gr_test(nsmp), tmp_ug(nsmp)
+  real :: tmp_amp, tmp_damp
   real(8) :: logQratio, p_rand
   logical :: null_flag, accept_flag
   real(8), external :: gauss
@@ -69,7 +70,8 @@ subroutine mcmc(ichain, T, logPPD)
   else 
      itype = 4
   end if
-
+  
+  
   if (itype == 1) then
      
      ! Birth proposal
@@ -105,6 +107,14 @@ subroutine mcmc(ichain, T, logPPD)
              & -log(sdv_birth(iz)) - 0.5 * log(pi2) -  &
              & tmp_ampz**2 / (2.0 * sdv_birth(iz)**2)  &
              & )
+
+        call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
+             & idt_test(tmp_nsp), tmp_ampz, &
+             & u(1:nsmp, ir), ur_gz_test)
+        call conv_waveform(nsmp, uz_gr(1:nsmp, ichain), &
+             & idt_test(tmp_nsp), tmp_ampr, &
+             & u(1:nsmp, iz), uz_gr_test)
+        
      end if
   else if (itype == 2) then
      ! Death proposal
@@ -132,6 +142,14 @@ subroutine mcmc(ichain, T, logPPD)
              & tmp_ampz**2 / (2.0 * sdv_birth(iz)**2)  &
              & )
         
+        call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
+             & idt_test(itarget), -tmp_ampz, &
+             & u(1:nsmp, ir), ur_gz_test)
+        call conv_waveform(nsmp, uz_gr(1:nsmp, ichain), &
+             & idt_test(itarget), -tmp_ampr, &
+             & u(1:nsmp, iz), uz_gr_test)
+        
+
         do isp = itarget, tmp_nsp
            idt_test(isp) = idt_test(isp + 1)
            amp_test(isp, 1:ncmp) = amp_test(isp + 1, 1:ncmp)
@@ -139,6 +157,9 @@ subroutine mcmc(ichain, T, logPPD)
         idt_test(tmp_nsp + 1) = 0
         amp_test(tmp_nsp + 1, 1:ncmp) = 0.0
         nsp_test = tmp_nsp
+
+        
+        
      end if
      
   else if (itype == 3) then
@@ -151,7 +172,25 @@ subroutine mcmc(ichain, T, logPPD)
      
      if (.not. null_flag) then
         idt_test(itarget) = tmp_idt
+        tmp_ampr = amp_test(itarget, ir)
+        tmp_ampz = amp_test(itarget, iz)
+        call conv_waveform(nsmp, uz_gr(1:nsmp, ichain), &
+             & idt(itarget, ichain), -tmp_ampr, &
+             & u(1:nsmp, iz), tmp_ug)
+        call conv_waveform(nsmp, tmp_ug, &
+             & idt_test(itarget), tmp_ampr, &
+             & u(1:nsmp, iz), uz_gr_test)
+        call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
+             & idt(itarget, ichain), -tmp_ampz, &
+             & u(1:nsmp, ir), tmp_ug)
+        call conv_waveform(nsmp, tmp_ug, &
+             & idt_test(itarget), tmp_ampz, &
+             & u(1:nsmp, ir), ur_gz_test)
+
      end if
+
+     
+
   else
      ! Perturb proposal
      itarget = int(grnd() * (nsp_test + 1)) ! [0, k]
@@ -160,13 +199,27 @@ subroutine mcmc(ichain, T, logPPD)
         null_flag = .true. ! cannot perturb due to regularization
      end if
      
-     tmp_amp = amp_test(itarget, icmp) + gauss() * sdv_amp(icmp)
+     tmp_damp = gauss() * sdv_amp(icmp)
+     tmp_amp = amp_test(itarget, icmp) + tmp_damp
      if (tmp_amp < amp_min(icmp) .or. tmp_amp > amp_max(icmp)) then
         null_flag = .true.
      end if
 
      if (.not. null_flag) then
         amp_test(itarget, icmp) = tmp_amp
+        
+        if (icmp == ir) then
+           call conv_waveform(nsmp, uz_gr(1:nsmp, ichain), &
+                & idt(itarget, ichain), tmp_damp, &
+                & u(1:nsmp, iz), uz_gr_test)
+           ur_gz_test(1:nsmp) = ur_gz(1:nsmp, ichain)
+        else
+           call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
+                & idt(itarget, ichain), tmp_damp, &
+                & u(1:nsmp, ir), ur_gz_test)
+           uz_gr_test(1:nsmp) = uz_gr(1:nsmp, ichain)
+        end if
+        
      end if
   end if
 
@@ -175,23 +228,12 @@ subroutine mcmc(ichain, T, logPPD)
   !*******
 
   if (.not. null_flag) then
-     call calc_PPD(nsp_test, idt_test, amp_test, logPPD)
+     call calc_PPD(nsp_test, ur_gz_test, uz_gr_test, logPPD)
      call judge_mcmc(T, logPPDstore(ichain), logPPD, &
           & logQratio, accept_flag)
   else
      accept_flag = .false.
   end if
-  
-  !write(*,*)"CCC", logPPD, logPPDstore(ichain)
-  !write(*,*)
-  !write(*,*)"current model -> proposed model : result : proposal type" // &
-  !     & " : prior bounds"
-  !write(*,*) logPPDstore(ichain), "->", logPPD, ":", accept_flag, &
-  !     & ":", itype, ":", null_flag
-  !write(*,*)"current  dimension: ", nsp(ichain)
-  !write(*,*)"proposed dimension: ", nsp_test
-  !write(*,*)
-
   
   if (abs(T - 1.0) < eps) then
      nprop(itype) = nprop(itype) + 1
@@ -208,6 +250,8 @@ subroutine mcmc(ichain, T, logPPD)
      idt(:, ichain) = idt_test(:)
      amp(:, :, ichain) = amp_test(:, :)
      logPPDstore(ichain) = logPPD
+     ur_gz(1:nsmp, ichain) = ur_gz_test(1:nsmp)
+     uz_gr(1:nsmp, ichain) = uz_gr_test(1:nsmp)
   else 
      logPPD = logPPDstore(ichain)
   end if

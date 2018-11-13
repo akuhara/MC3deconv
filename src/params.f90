@@ -137,6 +137,7 @@ module params
   ! PPD storage
   !********************************************************************
   real(8), allocatable :: logPPDstore(:)
+  real(8), allocatable :: ur_gz(:,:), uz_gr(:,:)
 
 end module params
 

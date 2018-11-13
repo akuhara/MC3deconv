@@ -24,19 +24,15 @@
 !           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
 !
 !=======================================================================
-subroutine calc_PPD(nsp_test, idt_test, amp_test, log_ppd)
+subroutine calc_PPD(n, cnv1, cnv2, log_ppd)
   use params
   implicit none
   real(8), intent(out) :: log_ppd
-  integer, intent(in) :: nsp_test, idt_test(0:nsp_max)
-  real, intent(in) :: amp_test(0:nsp_max, ncmp)
-  real :: cnv1(nsmp), cnv2(nsmp)
+  integer, intent(in) :: n
+  real(8), intent(in) :: cnv1(nsmp), cnv2(nsmp)
   real(8) :: res, dif, log_prior, log_lklh, fact
+  integer :: it, isp
   
-  integer :: it, isp, n, ierr
-  logical :: reg
-  
-  n = nsp_test
 
   ! NOTE this subroutine return negative of log(PPD)
   log_ppd = 0.d0
@@ -62,14 +58,6 @@ subroutine calc_PPD(nsp_test, idt_test, amp_test, log_ppd)
   log_prior = log_prior - dble(n + 1) * log(del_amp(ir))
   
   
-  ! likelihood
-  call conv_waveform(n, idt_test(0:n), &
-       & amp_test(0:n, iz), nsmp, u(1:nsmp, ir), cnv1)
-
-  call conv_waveform(n, idt_test(0:n), &
-       & amp_test(0:n, ir), nsmp, u(1:nsmp, iz), cnv2)
-  
-
   res = 0.0
   do it = 1, nsmp
      dif = cnv1(it) - cnv2(it)

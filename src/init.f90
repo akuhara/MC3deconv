@@ -32,6 +32,7 @@ subroutine init()
   real :: maxamp, t, ar, az
   logical :: output_ini_model, give_ini_model ! for debug
   real, allocatable :: ini_gr(:), ini_gz(:)
+  real(8), allocatable :: tmp(:)
   
   character(200) :: ini_file
 
@@ -50,7 +51,8 @@ subroutine init()
   allocate(step_count(nchains))
   allocate(green_count(ngrn, nabin, ncmp))
   allocate(logPPDstore(nchains))
-
+  allocate(ur_gz(nsmp,nchains), uz_gr(nsmp,nchains))
+  allocate(tmp(nsmp))
 
   if (output_ini_model .and. rank > 0) then
      allocate(ini_gr(ngrn), ini_gz(ngrn))
@@ -86,6 +88,8 @@ subroutine init()
   
   
   ! set initial model
+  ur_gz(:,:) = 0.0
+  uz_gr(:,:) = 0.0
   amp(:, :, :) = 0.0
   idt(:, :) = 0
   do ichain = 1, nchains
@@ -136,6 +140,20 @@ subroutine init()
      amp(0, iz, ichain) = 1.0
      idt(0, ichain) = 1
      
+     ! calculate multichannel convolution
+     do isp = 0, nsp(ichain)
+        call conv_waveform(nsmp, ur_gz(1:nsmp, ichain), &
+             & idt(isp, ichain), amp(isp, iz, ichain), &
+             & u(1:nsmp, ir), tmp)
+        ur_gz(1:nsmp, ichain) = tmp(1:nsmp)
+                
+        call conv_waveform(nsmp, uz_gr(1:nsmp, ichain), &
+             & idt(isp, ichain), amp(isp, ir, ichain), &
+             & u(1:nsmp, iz), tmp)
+        uz_gr(1:nsmp, ichain) = tmp(1:nsmp)
+     end do
+
+
      ! output initial model 
      if (output_ini_model .and. rank > 0) then
         n = nsp(ichain)
@@ -154,8 +172,8 @@ subroutine init()
      
      
      ! calculate PPD
-     call calc_PPD(nsp(ichain), idt(:, ichain), &
-          & amp(:, :, ichain), logPPDstore(ichain))
+     call calc_PPD(nsp(ichain), ur_gz(1:nsmp, ichain), &
+          & uz_gr(1:nsmp, ichain), logPPDstore(ichain))
      
   end do
   if (output_ini_model .and. rank > 0) then
