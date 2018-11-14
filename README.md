@@ -1,6 +1,6 @@
 # MC3deconv (Multi-Channel deconvolution by Markov-Chain Monte Calro
 
-One of the purposes of seismology is to investigate the Earth's subsurface structure using seismic waveforms. The receiver function method extracts useful signals (i.e., P-to-S converted phases) from the teleseismic waveforms by deconvolving P component records from the corresponding SV comonents. Behind the many successful applications, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples on the P components. 
+One of the purposes of seismology is to investigate the Earth's subsurface structure using seismic waveforms. The receiver function method extracts useful signals (i.e., P-to-S converted phases) from the teleseismic waveforms by deconvolving P component records from the corresponding SV (or SH) components. Despite the many successful applications, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples on the P components. 
 
 The technique developed here, MC3deconv, nicely overcomes these issues. The method optimizes the equation of multichannel deconvolution, in which two components of the reciver-sided Green's functions are related directly without deconvolution. To regularize the inverse problem, these Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
@@ -23,7 +23,10 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 
 ## How to run
 
-Run the program by `mpirun -np (# of processes) bin/mc3deconv`. Since one of the processes are used only to control temperature swapping between McMC chains, at least two processes are needed. Also, a file, "params.in", must be exist in the current direcory, in which user-given parameters are to be specified. The easiest way to test is moving to "sample1" directory and running the program. All necessary input files are already there. 
+* Use `mpirun -np [Nproc] bin/mc3deconv`. 
+ * Nproc: Number of proccesses (must be >= 2). 
+ * A parameter file named "params.in" must be exist in the working directory.
+* The easiest way to test
 
 `cd sample1`
 
