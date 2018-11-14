@@ -8,8 +8,8 @@ More details can be found in [the paper by T. Akuhara (currently in revision)].
 
 ### Limitations so far
 
-* Development of MC3deconv originally aims to acquire both radial (R) and vertical (Z) components of Green's functions. However, our experiments empirically suggest that the Z-component is not estimated correctly, while it provides relatively good estimation for the R-component.
-* MC3deconv assumes noise in input data is distributed according to Gaussian distribution with no correlation over the time domain. The actual noise in real seismograms, however, has temporal correlation undoubtly. 
+* This method can recover both radial (R) and vertical (Z) components of Green's functions in theory. However, our experience suggest that the estimated Z-component is not so reliable as the R-component.
+* This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
 
 These limitations, as well as advantages, are discussed in [the paper by T. Akuhara (currently in revision)].
 
