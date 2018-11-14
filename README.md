@@ -16,17 +16,16 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 ---
 
 ## How to install
-
-* Use `make` command in the root directory of this package. 
-  * `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
-  * If one wish to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. See Makefile for more details.
+Use `make` command in the root directory of this package. 
+* `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
+* If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. See Makefile for more details.
 
 ## How to run
 
-* Use `mpirun -np [Nproc] bin/mc3deconv`. 
- * Nproc: Number of proccesses (must be >= 2). 
+Use `mpirun -np [Nproc] bin/mc3deconv`. 
+ * Nproc = Number of proccesses (must be >= 2). 
  * A parameter file named "params.in" must be exist in the working directory.
-* The easiest way to test
+The easiest way to test is:
 
 `cd sample1`
 
