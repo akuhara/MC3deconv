@@ -1,6 +1,6 @@
-# MultiChannel deconvolution by reversible-jump Markov-Chain Monte Carlo (MC3deoncv)
+# MC3deconv
 
-This package provides a fortran code to perform deconvolution of teleseismic waveforms (i.e., calculation of receiver-sided Green's functions, which is expected te be equal to conventional receiver functions in ideal conditions) through MultiChannel deconvolution using reversible-jump Markov-Chain Mente Carlo (MC3deconv). 
+Multichannel deconvolution by Markov-chain Monte Calro
 
 ## What's MC3deconv? 
 
@@ -21,8 +21,9 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 
 ## How to install
 
-Compiling source codes can be done by simiply typing, `make` in the main directory. This process assumes that `mpif90` is available and that the `mpif90` links to GNU fortran compiler (i.e., `gfortran`). Alternatively, you can use `mpif90` that links to Intel compiler (i.e., `ifort`). In this case, some modification is necessary in Makefile (see Makefile for details). Currently, we have chekced the program working correctly on centOS7 with GNU fortran compiler.
-
+* Use `make` command in the root directory of this package. 
+  * `mpif90` must be linked to GNU fortran compiler (i.e., `gfortran`).
+  * Intel compiler (i.e., `ifort`) is also available. In this case, some modification is necessary in Makefile (see Makefile for more details)
 
 ## How to run
 
