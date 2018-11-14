@@ -19,8 +19,8 @@
 !
 !   Contact information
 !
-!   Email : akuhara@eri.u-tokyo.ac.jp 
-!   Adress: Earthquake Research Institute, The Univesity of Tokyo
+!   Email  : akuhara @ eri. u-tokyo. ac. jp 
+!   Address: Earthquake Research Institute, The Univesity of Tokyo
 !           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
 !
 !=======================================================================
@@ -47,9 +47,7 @@ subroutine read_data()
      
      read(io_obs, rec = 1) tmp_delta
      if (abs(tmp_delta - delta) > eps) then
-        write(0,*) "ERROR: sampling interval must be ", delta
-        write(0,*) "Otherwise, specify the correct value in " // &
-             & "parameter file"
+        write(0,*) "ERROR: in sampling interval:", delta
         call mpi_finalize(ierr)
         stop
      end if

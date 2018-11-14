@@ -19,8 +19,8 @@
 !
 !   Contact information
 !
-!   Email : akuhara@eri.u-tokyo.ac.jp 
-!   Adress: Earthquake Research Institute, The Univesity of Tokyo
+!   Email  : akuhara @ eri. u-tokyo. ac. jp 
+!   Address: Earthquake Research Institute, The Univesity of Tokyo
 !           1-1-1, Yayoi, Bunkyo-ku, Tokyo 113-0032, Japan
 !
 !=======================================================================
