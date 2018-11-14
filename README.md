@@ -24,7 +24,7 @@ An executable file, `mc3deconv`, is created under the `bin` directory.
 ## How to run
 
 One may run the program by `mpirun -np [Nproc] /path/to/this/package/bin/mc3deconv`, for example. 
- * Nproc = Number of proccesses (must be >= 2). 
+ * Nproc = Number of processes (must be >= 2). 
  * A parameter file named "params.in" must be exist in the working directory. See below for more details.
 
 The easiest way to test is:
