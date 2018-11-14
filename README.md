@@ -1,12 +1,8 @@
-# MC3deconv
+# MC3deconv (Multi-Channel deconvolution by Markov-Chain Monte Calro
 
-Multichannel deconvolution by Markov-chain Monte Calro
+One of the purposes of seismology is to investigate the Earth's subsurface structure using seismic waveforms. The receiver function method extracts useful signals (i.e., P-to-S converted phases) from the teleseismic waveforms by deconvolving P component records from the corresponding SV comonents. Behind the many successful applications, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples on the P components. 
 
-## What's MC3deconv? 
-
-One of the purposes of seismology is to explore the Earth's subsurface structure using seismic waveforms. The receiver function method was invented in the 1970s for extracting useful information from the waveforms. The method eliminates the incident wavelet shape from the teleseismic waveforms by deconvolution that enables to detect useful signal such as P-to-S converted phases. Behind the many successful applications, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples. 
-
-The technique developed here, MC3deconv, nicely overcomes these issues. The method utilizes the equation of multichannel deconvolution, not requiring the problematic deconvolution and approximation of the incident wavelet. To regularize the inverse problem, receiver-sided Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
+The technique developed here, MC3deconv, nicely overcomes these issues. The method optimizes the equation of multichannel deconvolution, in which two components of the reciver-sided Green's functions are related directly without deconvolution. To regularize the inverse problem, these Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
 More details can be found in [the paper by T. Akuhara (currently in revision)].
 
@@ -22,8 +18,8 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 ## How to install
 
 * Use `make` command in the root directory of this package. 
-  * `mpif90` must be linked to GNU fortran compiler (i.e., `gfortran`).
-  * Intel compiler (i.e., `ifort`) is also available. In this case, some modification is necessary in Makefile (see Makefile for more details)
+  * `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
+  * If one wish to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. See Makefile for more details.
 
 ## How to run
 
