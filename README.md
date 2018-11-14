@@ -19,12 +19,13 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 Use `make` command in the root directory of this package. 
 * `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
 * If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. See Makefile for more details.
+An executable file, `mc3deconv`, is created under the `bin` directory.
 
 ## How to run
 
-Use `mpirun -np [Nproc] bin/mc3deconv`. 
+One may run the program by `mpirun -np [Nproc] /path/to/this/package/bin/mc3deconv`, for example. 
  * Nproc = Number of proccesses (must be >= 2). 
- * A parameter file named "params.in" must be exist in the working directory.
+ * A parameter file named "params.in" must be exist in the working directory. See below for more details.
 The easiest way to test is:
 
 `cd sample1`
@@ -71,7 +72,7 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 
 ## Output
 
-In the current version (ver. 0.0), five output files are created after running the program.
+Five output files are created after running the program.
 
 ### dim.ppd (ascii format)
 
