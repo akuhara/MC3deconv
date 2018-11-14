@@ -2,18 +2,20 @@ MF90      = mpif90
 
 
 # GNU fortran compiler
-FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check  
+FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check
 
 # GNU fortran compiler (for debug)
-#FFLAGS = -pg -Wall -pedantic -std=f95 -fbounds-check -O -Wuninitialized \
+# FFLAGS = -pg -Wall -pedantic -std=f95 -fbounds-check -O -Wuninitialized \
             -ffpe-trap=invalid,zero,overflow -fbacktrace \
             -fno-range-check 
 
 # Intel compiler
-#FFLAGS = -O3 -parallel -xAVX
+# FFLAGS = -O3 -parallel -assume byterecl
+
 
 # Intel compiler (for debug)
-#FFLAGS = -O0 -g -traceback -CB -fpe0 -check uninit -std -warn all -check all
+# #FFLAGS = -O0 -g -traceback -CB -fpe0 -check uninit -std -warn all \
+            -check all -assume byterecl
 
 
 MPI       = -DMPI=1 
