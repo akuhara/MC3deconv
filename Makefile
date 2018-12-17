@@ -18,8 +18,6 @@ FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check
             -check all -assume byterecl
 
 
-MPI       = -DMPI=1 
-
 BINDIR    = ./bin
 TARGET    = $(BINDIR)/mc3deconv
 OBJS      = src/mc3deconv.o src/params.o src/mcmc.o \
@@ -30,7 +28,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@if [ ! -d $(BINDIR) ]; then mkdir $(BINDIR); fi
-	$(MF90) $(FFLAGS) $(MPI) $^ -o $@ 
+	$(MF90) $(FFLAGS) $^ -o $@ 
 
 src/pt_control.o: params.mod mt19937.mod
 src/mc3deconv.o: params.mod
