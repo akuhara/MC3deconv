@@ -63,7 +63,7 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 |8| Input Z component file (in SAC format) | -|
 |9| Input R component file (in SAC format)|-|
 |10| Sampling interval of input data (sec)|-|
-|11| Start time of the analysis window relative to file beginning (s)| End time (s) |
+|11| Start time of the analysis window relative to file beginning (s)| End time of the analysis window relative to file beginning (s) |
 |12| Lower prior limit for # of pulses | Upper limit for # of pulses|
 |13| Lower prior limit for Z amplitude | Upper limit for Z amplitude|
 |14| Lower prior limit for R amplitude | Upper limit for R amplitude|
@@ -86,8 +86,15 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 You can find an example of `params.in` in the `sample1` directory.
 
 
-## Data file (name stated in `params.in`)
+## Data file (user's given name)
 
+### Format
+
+* Input waveform data should be SAC format.
+
+### Example
+
+Examples of data files, `syn.r` and `syn.z` are installed in the `sample1` directory. 
 
 ---
 
