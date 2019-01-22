@@ -4,10 +4,14 @@ One of the purposes of seismology is to investigate the Earth's subsurface struc
 
 The technique developed here, MC3deconv, nicely overcomes these issues. The method optimizes the equation of multichannel deconvolution, in which two components of the reciver-sided Green's functions are related directly without deconvolution. To regularize the inverse problem, these Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
+
 ### Reference
+
 * T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
 
+
 ## Terms of use
+
 * Please cite [Akuhara et al. (2019)](#Reference) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
@@ -17,10 +21,12 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 * Although this method is designed to retrieve both radial (R) and vertical (Z) components of Green's functions, our experience suggest that the estimated Z-component is not so reliable as the R-component.
 * This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
 
----
+
 
 # How to install
+
 Use `make` command in the root directory of this package. 
+
 * `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
 * If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. 
 * An executable file, `mc3deconv`, is created under the `bin` directory.
@@ -38,8 +44,6 @@ The easiest way to test is:
 `mpirun -np 2 ../bin/mc3deconv`
 
 In the `sample1` directory, all necessary data and parameter files are already installed.
-
----
 
 # Input file format
 
@@ -83,7 +87,6 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 
 You can find an example of `params.in` in the `sample1` directory.
 
-
 ## Data file (user's given name)
 
 ### Format
@@ -93,8 +96,6 @@ You can find an example of `params.in` in the `sample1` directory.
 ### Example
 
 Examples of data files, `syn.r` and `syn.z` are installed in the `sample1` directory. 
-
----
 
 # Output file format
 
@@ -125,14 +126,11 @@ The mean models of R and Z component Green's functions.
 
 `Gr.mean` and `Gz.mean` are written in SAC format.
 
----
-
 # Sample datasets
 There are two sample datasets, which may be useful for testing the program. These are the same data as used in [Akuhara et al. (2019)](#Reference). 
 
 * Sample1: Synthetic data in `sample1`
 * Sample2: Real OBS data in `sample2`
-
 
 # Acknowledgments
 
