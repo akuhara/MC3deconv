@@ -8,6 +8,7 @@ More details can be found in [the paper by T. Akuhara (currently in revision)].
 
 ### Terms of use
 * Please cite the following paper when you publish an article or making presentation using this method.
+** T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
 
@@ -28,15 +29,17 @@ An executable file, `mc3deconv`, is created under the `bin` directory.
 
 ## How to run
 
-One may run the program by `mpirun -np [Nproc] /path/to/this/package/bin/mc3deconv`, for example. 
+One may run the program by `mpirun -np [Nproc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
  * Nproc = Number of processes (must be >= 2). 
- * A parameter file named "params.in" must be exist in the working directory. See below for more details.
+ * A parameter file named "params.in" must be exist in the current directory. See below for detailed format of the parameter file.
 
 The easiest way to test is:
 
 `cd sample1`
 
 `mpirun -np 2 ../bin/mc3deconv`
+
+In the `sample1` directory, all necessary data and parameter files are already installed.
 
 ---
 
