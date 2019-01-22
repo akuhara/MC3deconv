@@ -29,7 +29,7 @@ An executable file, `mc3deconv`, is created under the `bin` directory.
 
 ## How to run
 
-One may run the program by `mpirun -np [Nproc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
+`mpirun -np [Nproc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
  * Nproc = Number of processes (must be >= 2). 
  * A parameter file named "params.in" must be exist in the current directory. See below for detailed format of the parameter file.
 
@@ -98,38 +98,44 @@ Examples of data files, `syn.r` and `syn.z` are installed in the `sample1` direc
 
 ---
 
-## Output file format
+# Output file format
 
 Five output files are created after running the program.
 
-### dim.ppd (ascii format)
+## dim.ppd 
 
-The posterior probability distribution of the number of pulses. The format is:
+The posterior probability distribution of the number of pulses. 
 
+### Format
 |1st column|2nd column|
 |:--:|:--:|
 |# of pulses|probability|
 
 
-### Gr.ppd / Gz.ppd (ascii forat)
+## Gr.ppd / Gz.ppd 
 The posterior probability distribution of R and Z component Green's functions. The format is:
 
+### Format
 |1st column|2nd column|3rd colmun|
 |:--:|:--:|:--:|
 |time after P (s)|amplitude|probability|`
 
-### Gr.mean / Gz.mean (SAC format)
-The mean models of R and Z component Green's functions in [SAC](http://ds.iris.edu/files/sac-manual/) format.
+## Gr.mean / Gz.mean
+The mean models of R and Z component Green's functions.
+
+### Format
+
+`Gr.mean` and `Gz.mean` are written in SAC format.
 
 ---
 
-## Samples
+# Samples
 There are some sample data, which may be useful for testing the program.
 
 * Sample1: Synthetic data in `sample1`
 * Sample2: Real OBS data in `sample2`
 
 
-## Acknowledgments
+# Acknowledgments
 
 Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2.
