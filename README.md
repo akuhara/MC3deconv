@@ -8,7 +8,7 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 * T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
 
 ## Terms of use
-* Please cite Akuhara et al. (2019) when you publish an article or making presentation using this method.
+* Please cite [Akuhara et al. (2019)](#Reference) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
 
