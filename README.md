@@ -44,38 +44,46 @@ In the `sample1` directory, all necessary data and parameter files are already i
 ---
 
 # Input file format
+
+## Parameter file (params.in)
+
 A parameter file, which sets tuning parameters and input data, etc., must exist in the working directory from which `mc3deconv` is called, with the name "params.in". The format of the parameter file is as below, but you can put comment lines that start with "#" if necessary.
 
-|Line #|parameter 1|parameter 2|Example value1| Example value2|
-|:--:|:--:|:--:|:--:|:--|
-|1| # of iterations in burn-in period|-|200000|-|
-|2| # of iterations in sampling period|-|1200000|-|
-|3| # of iterations per generating one sample|-|200|-|
-|4| Random seed|-|12345678|-|
-|5| # of McMC chains per process (for parallel tempering|-|10|-|
-|6| # of non-tempered chains|-|2|-|
-|7| Maximum temperature|-|100.0|-|
-|8| Input Z component file (in SAC format) | -|input/syn_obs.z|-|
-|9| Input R component file (in SAC format)|-|input/syn_obs.r|-|
-|10| Sampling interval of input data (sec)|-|0.05|-|
-|11| Start time of the analysis window relative to file beginning (s)| End time (s) |195.0|255.0|
-|12| Lower prior limit for # of pulses | Upper limit|1|101|
-|13| Lower prior limit for Z amplitude | Upper limit|-0.8|0.8|
-|14| Lower prior limit for R amplitude | Upper limit|-0.8|0.8|
-|15| Lower piror limit for pulse timing relative to P (s) | Upper limit|1.0|60.0|
-|16| Probability of birth proposal (adding a pulse) |-|0.35|| 
-|17| Probability of death proposal (removing a pulse)|-|0.35||
-|18| Probability of time-shit proposal |-|0.05|-|
-|19| Probability of amplitude-perturb proposal |-|0.25|-|
-|20| Standard deviation to perturb Z amplitude | Same but for R amplitude| 0.05 | 0.05|
-|21| Standard deviation to newly generate Z amplitude | Same but for R amplitude | 0.4 | 0.4|
-|22| Standard deviation to shift timing (s) | -|0.1|-|
-|23| Total time length of output (s) | -|63.0|-|
-|24| Acausal time length preceding P in output (s) | - | 3.0 | -|
-|25| Factor of Gaussian low-pass filter | - | 8.0 | -|
-|26| Minimum amplitudes for output| Maximum | -2.2 | 2.2|
-|27| Amplitude bin width for output| - | 0.02 | |
+### Format
 
+|Line #|parameter 1|parameter 2|
+|:--:|:--:|:--:|:--:|:--|
+|1| Number of iterations in burn-in period|-|
+|2| Number of iterations in sampling period|-|
+|3| Number of iterations per generating one sample|-|
+|4| Random number seed|-|
+|5| Number of McMC chains per process (for parallel tempering)|-|
+|6| Number of non-tempered chains|-|
+|7| Maximum temperature|-|
+|8| Input Z component file (in SAC format) | -|
+|9| Input R component file (in SAC format)|-|
+|10| Sampling interval of input data (sec)|-|
+|11| Start time of the analysis window relative to file beginning (s)| End time (s) |
+|12| Lower prior limit for # of pulses | Upper limit for # of pulses|
+|13| Lower prior limit for Z amplitude | Upper limit for Z amplitude|
+|14| Lower prior limit for R amplitude | Upper limit for R amplitude|
+|15| Lower prior limit for pulse timing relative to direct P arrival (s) | Upper limit for pulse timing relative to direct P arrival (s)|
+|16| Probability of birth proposal (adding a pulse) |
+|17| Probability of death proposal (removing a pulse)|
+|18| Probability of time-shit proposal |
+|19| Probability of amplitude-perturb proposal |
+|20| Standard deviation to perturb Z amplitude | Same but for R amplitude|
+|21| Standard deviation to newly generate Z amplitude | Same but for R amplitude |
+|22| Standard deviation to shift timing (s) ||
+|23| Total time length of output (s) | -|
+|24| Acausal time length preceding direct P arrival for output (s) | - |
+|25| Factor of Gaussian low-pass filter | - |
+|26| Minimum amplitudes for output| Maximum amplitudes for output|
+|27| Amplitude bin width for output| - |
+
+### Example 
+
+You can find an example of `params.in` in the `sample1` directory.
 
 ---
 
