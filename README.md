@@ -1,4 +1,4 @@
-# MC3deconv (Multi-Channel deconvolution by reversible-jump Markov-Chain Monte Carlo)
+# MC3deconv: Multi-Channel deconvolution by reversible-jump Markov-Chain Monte Carlo
 
 One of the purposes of seismology is to investigate the Earth's subsurface structure using seismic waveforms. The receiver function method extracts useful signals (i.e., P-to-S converted phases) from the teleseismic waveforms by deconvolving P component records from the corresponding SV (or SH) components. Despite the many successful applications, conventional receiver function methods often fail due to numerical instability of the deconvolution and strong multiples on the P components. 
 
