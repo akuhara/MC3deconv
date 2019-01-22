@@ -14,10 +14,8 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 ## Limitations so far
 
-* This method can recover both radial (R) and vertical (Z) components of Green's functions in theory. However, our experience suggest that the estimated Z-component is not so reliable as the R-component.
+* Although this method is designed to retrieve both radial (R) and vertical (Z) components of Green's functions, our experience suggest that the estimated Z-component is not so reliable as the R-component.
 * This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
-
-These limitations, as well as advantages, are discussed in Akuhara et al. (2019).
 
 ---
 
