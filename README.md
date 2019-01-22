@@ -6,6 +6,11 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 More details can be found in [the paper by T. Akuhara (currently in revision)].
 
+### Terms of use
+* Please cite the following paper when you publish an article or making presentation using this method.
+* Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
+
+
 ### Limitations so far
 
 * This method can recover both radial (R) and vertical (Z) components of Green's functions in theory. However, our experience suggest that the estimated Z-component is not so reliable as the R-component.
