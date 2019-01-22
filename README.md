@@ -4,7 +4,7 @@ One of the purposes of seismology is to investigate the Earth's subsurface struc
 
 The technique developed here, MC3deconv, nicely overcomes these issues. The method optimizes the equation of multichannel deconvolution, in which two components of the reciver-sided Green's functions are related directly without deconvolution. To regularize the inverse problem, these Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
-More details can be found in [the paper by T. Akuhara (currently in revision)].
+More details can be found in Akuhara et al. (2019).
 
 ## Terms of use
 * Please cite the following paper when you publish an article or making presentation using this method.
@@ -17,7 +17,7 @@ More details can be found in [the paper by T. Akuhara (currently in revision)].
 * This method can recover both radial (R) and vertical (Z) components of Green's functions in theory. However, our experience suggest that the estimated Z-component is not so reliable as the R-component.
 * This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
 
-These limitations, as well as advantages, are discussed in [the paper by T. Akuhara (currently in revision)].
+These limitations, as well as advantages, are discussed in Akuhara et al. (2019).
 
 ---
 
@@ -129,8 +129,8 @@ The mean models of R and Z component Green's functions.
 
 ---
 
-# Samples
-There are some sample data, which may be useful for testing the program.
+# Sample datasets
+There are two sample datasets, which may be useful for testing the program. These are the same data as used in Akuhara et al. (2019) 
 
 * Sample1: Synthetic data in `sample1`
 * Sample2: Real OBS data in `sample2`
