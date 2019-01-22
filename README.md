@@ -6,13 +6,13 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 More details can be found in [the paper by T. Akuhara (currently in revision)].
 
-### Terms of use
+## Terms of use
 * Please cite the following paper when you publish an article or making presentation using this method.
 ** T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
 
-### Limitations so far
+## Limitations so far
 
 * This method can recover both radial (R) and vertical (Z) components of Green's functions in theory. However, our experience suggest that the estimated Z-component is not so reliable as the R-component.
 * This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
@@ -21,7 +21,7 @@ These limitations, as well as advantages, are discussed in [the paper by T. Akuh
 
 ---
 
-## How to install
+# How to install
 Use `make` command in the root directory of this package. 
 * `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
 * If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. See Makefile for more details.
@@ -43,7 +43,7 @@ In the `sample1` directory, all necessary data and parameter files are already i
 
 ---
 
-## Input
+# Input file format
 A parameter file, which sets tuning parameters and input data, etc., must exist in the working directory from which `mc3deconv` is called, with the name "params.in". The format of the parameter file is as below, but you can put comment lines that start with "#" if necessary.
 
 |Line #|parameter 1|parameter 2|Example value1| Example value2|
@@ -79,7 +79,7 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 
 ---
 
-## Output
+## Output file format
 
 Five output files are created after running the program.
 
@@ -113,4 +113,4 @@ There are some sample data, which may be useful for testing the program.
 
 ## Acknowledgments
 
-Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 3.
+Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2.
