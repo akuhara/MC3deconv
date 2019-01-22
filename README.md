@@ -4,11 +4,11 @@ One of the purposes of seismology is to investigate the Earth's subsurface struc
 
 The technique developed here, MC3deconv, nicely overcomes these issues. The method optimizes the equation of multichannel deconvolution, in which two components of the reciver-sided Green's functions are related directly without deconvolution. To regularize the inverse problem, these Green's functions are expressed in the form of successive pulses. The number of pulses, their timing, and amplitudes are inverted using Bayesian techniques, the reversible-jump Markov-chain Monte Carlo and the Parallel Tempering.
 
-More details can be found in Akuhara et al. (2019).
+### Reference
+*T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
 
 ## Terms of use
-* Please cite the following paper when you publish an article or making presentation using this method.
-  * T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
+* Please cite Akuhara et al. (2019) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
 
