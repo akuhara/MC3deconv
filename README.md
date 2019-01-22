@@ -52,7 +52,7 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 ### Format
 
 |Line #|parameter 1|parameter 2|
-|:--:|:--:|:--:|:--:|:--|
+|:--:|:--:|:--:|
 |1| Number of iterations in burn-in period|-|
 |2| Number of iterations in sampling period|-|
 |3| Number of iterations per generating one sample|-|
@@ -72,8 +72,8 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 |17| Probability of death proposal (removing a pulse)|
 |18| Probability of time-shit proposal |
 |19| Probability of amplitude-perturb proposal |
-|20| Standard deviation to perturb Z amplitude | Same but for R amplitude|
-|21| Standard deviation to newly generate Z amplitude | Same but for R amplitude |
+|20| Standard deviation to perturb Z amplitude | Standard deviation to perturb R amplitude|
+|21| Standard deviation to newly generate Z amplitude | Standard deviation to newly generate R amplitude |
 |22| Standard deviation to shift timing (s) ||
 |23| Total time length of output (s) | -|
 |24| Acausal time length preceding direct P arrival for output (s) | - |
@@ -84,6 +84,10 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 ### Example 
 
 You can find an example of `params.in` in the `sample1` directory.
+
+
+## Data file (name stated in `params.in`)
+
 
 ---
 
