@@ -128,7 +128,7 @@ The mean models of R and Z component Green's functions.
 ---
 
 # Sample datasets
-There are two sample datasets, which may be useful for testing the program. These are the same data as used in Akuhara et al. (2019) 
+There are two sample datasets, which may be useful for testing the program. These are the same data as used in [Akuhara et al. (2019)](#Reference). 
 
 * Sample1: Synthetic data in `sample1`
 * Sample2: Real OBS data in `sample2`
