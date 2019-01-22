@@ -22,8 +22,8 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 # How to install
 Use `make` command in the root directory of this package. 
 * `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
-* If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. See Makefile for more details.
-An executable file, `mc3deconv`, is created under the `bin` directory.
+* If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. 
+* An executable file, `mc3deconv`, is created under the `bin` directory.
 
 ## How to run
 
