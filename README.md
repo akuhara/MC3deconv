@@ -8,23 +8,15 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 Email: akuhara @ eri.u-tokyo.ac.jp
 
-# Reference
-
-* T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
-
-
 # Terms of use
 
 * Please cite [Akuhara et al. (2019)](#Reference) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
-
 # Limitations so far
 
 * Although this method is designed to retrieve both radial (R) and vertical (Z) components of Green's functions, our experience suggest that the estimated Z-component is not so reliable as the R-component.
 * This method assumes Gaussian noise without temporal correlation. This simplified treatment often leads to overfitting. 
-
-
 
 # How to install
 
@@ -138,3 +130,8 @@ There are two sample datasets, which may be useful for testing the program. Thes
 # Acknowledgments
 
 Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2.
+
+# Reference
+
+* T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
+
