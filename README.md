@@ -40,7 +40,7 @@ The easiest way to test is:
 
 In the `sample1` directory, all necessary data and parameter files are already installed.
 
-# Input file format
+# Input files
 
 ## Parameter file (params.in)
 
@@ -92,7 +92,7 @@ You can find an example of `params.in` in the `sample1` directory.
 
 Examples of data files, `syn.r` and `syn.z` are installed in the `sample1` directory. 
 
-# Output file format
+# Output files
 
 Five output files are created after running the program.
 
