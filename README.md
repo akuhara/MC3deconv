@@ -8,18 +8,18 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 Email: akuhara @ eri.u-tokyo.ac.jp
 
-### Reference
+# Reference
 
 * T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
 
 
-## Terms of use
+# Terms of use
 
 * Please cite [Akuhara et al. (2019)](#Reference) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
 
-## Limitations so far
+# Limitations so far
 
 * Although this method is designed to retrieve both radial (R) and vertical (Z) components of Green's functions, our experience suggest that the estimated Z-component is not so reliable as the R-component.
 * This method assumes Gaussian noise without temporal correlation. This simplified treatment often leads to overfitting. 
@@ -34,7 +34,7 @@ Use `make` command in the root directory of this package.
 * If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. 
 * An executable file, `mc3deconv`, is created under the `bin` directory.
 
-## How to run
+# How to run
 
 `mpirun -np [Nproc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
  * Nproc = Number of processes (must be >= 2). 
