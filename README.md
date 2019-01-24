@@ -56,7 +56,7 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 
 ### Format
 
-|Line #|parameter 1|parameter 2|
+|Line #|1st column|2nd column|
 |:--:|:--:|:--:|
 |1| Number of iterations in burn-in period|-|
 |2| Number of iterations in sampling period|-|
