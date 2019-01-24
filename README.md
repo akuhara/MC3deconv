@@ -22,7 +22,7 @@ Email: akuhara @ eri.u-tokyo.ac.jp
 ## Limitations so far
 
 * Although this method is designed to retrieve both radial (R) and vertical (Z) components of Green's functions, our experience suggest that the estimated Z-component is not so reliable as the R-component.
-* This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
+* This method assumes Gaussian noise without temporal correlation. This simplified treatment often leads to overfitting. 
 
 
 
