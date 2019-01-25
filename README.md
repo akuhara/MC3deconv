@@ -12,6 +12,7 @@ Email: akuhara @ eri.u-tokyo.ac.jp
 
 * Please cite [Akuhara et al. (2019)](#Reference) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
+* Any bug reports are welcome! Looking forward to hearing your experience. 
 
 ## Limitations so far
 
@@ -29,16 +30,20 @@ Use `make` command in the root directory of this package.
 ## How to run
 
 `mpirun -np [N_proc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
- * N_proc: Number of processes for parallel computation. 
- * A parameter file named "params.in" must be exist in the current directory. See below for detailed format of the parameter file.
+ * N_proc: Number of processes for parallel computation (must be >= 2, see the note below). 
+ * A parameter file named "params.in" must exist in the current directory. 
 
 The easiest way to test is:
 
 `cd sample1`
 
-`mpirun -np 2 ../bin/mc3deconv`
+`mpirun -np [N_proc] ../bin/mc3deconv`
 
-In the `sample1` directory, all necessary data and parameter files are already installed.
+In the `sample1` directory, all necessary data and parameter files are already prepared.
+
+## Note on parallel computation
+
+This program requires parallel computation. One of the processes is used to control the other processes, not performing MCMC sampling at all. Therefore, it is mandatory to use more than two processes.  
 
 ## Input files
 
