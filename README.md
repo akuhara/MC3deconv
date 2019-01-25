@@ -133,5 +133,5 @@ Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OB
 
 # Reference
 
-* T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
+* T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, _Journal of Geophysical Research: Solid Earth_, https://doi.org/10.1029/2018JB016499  
 
