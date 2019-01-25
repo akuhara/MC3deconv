@@ -22,14 +22,14 @@ Email: akuhara @ eri.u-tokyo.ac.jp
 
 Use `make` command in the root directory of this package. 
 
-* `mpif90` must be linked to the GNU fortran compiler (i.e., `gfortran`).
+* `mpifort` must be linked to the GNU fortran compiler (i.e., `gfortran`).
 * If one wishes to use the Intel compiler (i.e., `ifort`), some modification is necessary in Makefile. 
 * An executable file, `mc3deconv`, is created under the `bin` directory.
 
 ## How to run
 
-`mpirun -np [Nproc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
- * Nproc = Number of processes (must be >= 2). 
+`mpirun -np [N_proc] (path to the root directory of this package)/bin/mc3deconv`, for example. 
+ * N_proc: Number of processes for parallel computation. 
  * A parameter file named "params.in" must be exist in the current directory. See below for detailed format of the parameter file.
 
 The easiest way to test is:
@@ -115,6 +115,7 @@ The posterior probability distribution of R and Z component Green's functions. T
 |time after P (s)|amplitude|probability|`
 
 ### Gr.mean / Gz.mean
+
 The mean models of R and Z component Green's functions.
 
 #### Format
@@ -122,6 +123,7 @@ The mean models of R and Z component Green's functions.
 `Gr.mean` and `Gz.mean` are written in SAC format.
 
 ## Sample datasets
+
 There are two sample datasets, which may be useful for testing the program. These are the same data as used in [Akuhara et al. (2019)](#Reference). 
 
 * Sample1: Synthetic data in `sample1`
@@ -129,7 +131,7 @@ There are two sample datasets, which may be useful for testing the program. Thes
 
 ## Acknowledgments
 
-Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2.
+Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, [mt19937.f90](https://gist.github.com/ykonishi/5569005).
 
 ## Reference
 
