@@ -41,7 +41,7 @@ The easiest way to test is:
 
 In the `sample1` directory, all necessary data and parameter files are already prepared.
 
-## Note on parallel computation
+### Note on parallel computation
 
 This program requires parallel computation. One of the processes is used to control the other processes, not performing MCMC sampling at all. Therefore, it is mandatory to use more than two processes.  
 
