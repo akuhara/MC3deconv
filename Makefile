@@ -1,5 +1,4 @@
-MF90      = mpif90
-
+MF90      = mpifort
 
 # GNU fortran compiler
 FFLAGS = -ffast-math -march=native -mtune=native -O3 -fno-range-check
