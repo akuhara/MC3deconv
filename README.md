@@ -8,25 +8,17 @@ The technique developed here, MC3deconv, nicely overcomes these issues. The meth
 
 Email: akuhara @ eri.u-tokyo.ac.jp
 
-### Reference
-
-* T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, accepted by JGR: Solid Earth  
-
-
 ## Terms of use
 
 * Please cite [Akuhara et al. (2019)](#Reference) when you publish an article or making presentation using this method.
 * Also, make it clear that where readers or audiences can download this program package: you may put the link to the Github repository (https://github.com/akuhara/MC3deconv).
 
-
 ## Limitations so far
 
 * Although this method is designed to retrieve both radial (R) and vertical (Z) components of Green's functions, our experience suggest that the estimated Z-component is not so reliable as the R-component.
-* This method assumes Gaussian noise without temporal correlation. We think that this simplified treatment often leads to overfitting. 
+* This method assumes Gaussian noise without temporal correlation. This simplified treatment often leads to overfitting. 
 
-
-
-# How to install
+## How to install
 
 Use `make` command in the root directory of this package. 
 
@@ -48,15 +40,15 @@ The easiest way to test is:
 
 In the `sample1` directory, all necessary data and parameter files are already installed.
 
-# Input file format
+## Input files
 
-## Parameter file (params.in)
+### Parameter file (params.in)
 
 A parameter file, which sets tuning parameters and input data, etc., must exist in the working directory from which `mc3deconv` is called, with the name "params.in". The format of the parameter file is as below, but you can put comment lines that start with "#" if necessary.
 
-### Format
+#### Format
 
-|Line #|parameter 1|parameter 2|
+|Line #|1st column|2nd column|
 |:--:|:--:|:--:|
 |1| Number of iterations in burn-in period|-|
 |2| Number of iterations in sampling period|-|
@@ -86,55 +78,60 @@ A parameter file, which sets tuning parameters and input data, etc., must exist 
 |26| Minimum amplitudes for output| Maximum amplitudes for output|
 |27| Amplitude bin width for output| - |
 
-### Example 
+#### Example 
 
 You can find an example of `params.in` in the `sample1` directory.
 
-## Data file (user's given name)
+### Data file (user's given name)
 
-### Format
+#### Format
 
 * Input waveform data should be SAC format.
 
-### Example
+#### Example
 
 Examples of data files, `syn.r` and `syn.z` are installed in the `sample1` directory. 
 
-# Output file format
+## Output files
 
 Five output files are created after running the program.
 
-## dim.ppd 
+### dim.ppd 
 
 The posterior probability distribution of the number of pulses. 
 
-### Format
+#### Format
 |1st column|2nd column|
 |:--:|:--:|
 |# of pulses|probability|
 
 
-## Gr.ppd / Gz.ppd 
+### Gr.ppd / Gz.ppd 
 The posterior probability distribution of R and Z component Green's functions. The format is:
 
-### Format
+#### Format
 |1st column|2nd column|3rd colmun|
 |:--:|:--:|:--:|
 |time after P (s)|amplitude|probability|`
 
-## Gr.mean / Gz.mean
+### Gr.mean / Gz.mean
 The mean models of R and Z component Green's functions.
 
-### Format
+#### Format
 
 `Gr.mean` and `Gz.mean` are written in SAC format.
 
-# Sample datasets
+## Sample datasets
 There are two sample datasets, which may be useful for testing the program. These are the same data as used in [Akuhara et al. (2019)](#Reference). 
 
 * Sample1: Synthetic data in `sample1`
 * Sample2: Real OBS data in `sample2`
 
-# Acknowledgments
+## Acknowledgments
 
 Developing this package is supported by JSPS KAKENHI Grant Number JP17H06604. OBS data in the sample2 directory are collected by K. Nakahigashi and T. Yamada, under the program "Integrated Research Project on Seismic and Tsunami Hazards Around the Sea of Japan" of the Mistry of Education, Culture, Sports, Science and Technology (MEXT), Japan. This package uses a fortran program, mt19937.f90', which is an open code to generate random numbers distributed under the GNU General Public License version 2.
+
+## Reference
+
+* T. Akuhara, M. Bostock, A. Plourde, M. Shinohara (2019) Beyond Receiver Functions: Green's Function Estimation by Trans-Dimensional Inversion and Its Application to OBS Data, _Journal of Geophysical Research: Solid Earth_, https://doi.org/10.1029/2018JB016499  
+
