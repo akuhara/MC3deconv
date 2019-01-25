@@ -95,7 +95,7 @@ You can find an example of `params.in` in the `sample1` directory.
 
 #### Example
 
-Examples of data files, `syn.r` and `syn.z` are installed in the `sample1` directory. 
+Example data files, `true/syn_obs.r` and `true/syn_obs.z`, are installed in the `sample1` directory. 
 
 ## Output files
 
@@ -112,7 +112,7 @@ The posterior probability distribution of the number of pulses.
 
 
 ### Gr.ppd / Gz.ppd 
-The posterior probability distribution of R and Z component Green's functions. The format is:
+The posterior probability distribution of R and Z component Green's functions.
 
 #### Format
 |1st column|2nd column|3rd colmun|
